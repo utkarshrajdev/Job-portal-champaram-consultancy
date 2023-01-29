@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-#&y#8_iy_gr=0mqcp6%imdr@5uj^*1radhwp%)ml74_$#j^!83
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*','127.0.0.1', 'localhost']
 
 
 AUTHENTICATION_BACKENDS = [
@@ -215,12 +215,12 @@ SOCIALACCOUNT_PROVIDERS = {
 SOCIALACCOUNT_QUERY_EMAIL = True
 
 LOGIN_REDIRECT_URL = '/'
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+#STATIC_ROOT = BASE_DIR / "users/static/"
 
 
-
-#STATIC_ROOT = '/static/'
+#STATIC_ROOT = 'static/'
 SOCIALACCOUNT_LOGIN_ON_GET=True
 
 #SMTP Configuration

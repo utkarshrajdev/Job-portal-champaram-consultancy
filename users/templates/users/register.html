@@ -1,0 +1,104 @@
+{% extends "users/layout.html" %} {% load socialaccount %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10 col-md-10 col-lg-7 mx-auto">
+      <div class="card card-signin my-5" style="background-color: #f2f2f2;">
+        <div class="card-body">
+          <h3 class="text-center"><b>Register</b></h3>
+          <br />
+          <form class="form-signin">
+            <div class="form-group">
+              <a class="btn btn-outline-secondary btn-block" href="{% provider_login_url 'google' %}"><img
+                  src="https://dl.dropboxusercontent.com/s/es5sylabbcaobjr/google.png?dl=0" alt="Google" height="20"
+                  class="d-inline-block mr-1" />Register With Google</a>
+              <br />
+              <a class="btn btn-outline-secondary btn-block" href="{% provider_login_url 'github' %}"><img
+                  src="https://dl.dropboxusercontent.com/s/2929dbjh0nvgbgn/github.png?dl=0" alt="Github" height="20"
+                  class="d-inline-block mr-2" />Register With Github</a>
+              <br />
+              <a class="btn btn-outline-dark btn-block" href="{% provider_login_url 'linkedin_oauth2' %}"><img
+                  src="https://dl.dropboxusercontent.com/s/yz30dq16gqmjbv1/linkedin.png?dl=0" alt="Linkedin" height="20"
+                  class="d-inline-block mr-2" />Register With LinkedIn</a>
+            </div>
+            <h4 class="text-center">or</h3>
+
+              <hr my-2 />
+
+              <form>
+                
+              </form>
+
+              <div class="container h-100">
+                <div class="d-flex justify-content-center h-100">
+                  <div class="user_card">
+                    <div class="d-flex justify-content-center">
+                      <h3 id="form-title">REGISTER ACCOUNT</h3>
+                    </div>
+                    <div class="d-flex justify-content-center form_container">
+
+                      <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                          <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                          </div>
+                          {{form.username}}
+                        </div>
+                        <div class="input-group mb-2">
+                          <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                          </div>
+                          {{form.email}}
+                        </div>
+                        <div class="input-group mb-2">
+                          <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                          </div>
+                          {{form.password1}}
+                        </div>
+                        <div class="input-group mb-2">
+                          <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                          </div>
+                          {{form.password2}}
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                          <input class="btn login_btn" type="submit" value="Register Account">
+                        </div>
+                      </form>
+                    </div>
+                    {{form.errors}}
+                    <div class="mt-4">
+                      <div class="d-flex justify-content-center links">
+                        Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  /* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript
+//We start indexing at one because CSRF_token is considered and input field 
+*/
+
+  //Query All input fields
+  var form_fields = document.getElementsByTagName('input')
+  form_fields[1].placeholder = 'Username..';
+  form_fields[2].placeholder = 'Email..';
+  form_fields[3].placeholder = 'Enter password...';
+  form_fields[4].placeholder = 'Re-enter Password...';
+
+
+  for (var field in form_fields) {
+    form_fields[field].className += ' form-control'
+  }
+</script>
+
+{% endblock %}

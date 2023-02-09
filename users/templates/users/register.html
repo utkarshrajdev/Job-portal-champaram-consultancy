@@ -1,4 +1,4 @@
-{% extends "users/layout.html" %} {% load socialaccount %} {% block content %}
+{% extends "users/layout.html" %} {% load socialaccount %} {% load static %} {% block content %} 
 <div class="container">
   <div class="row">
     <div class="col-sm-10 col-md-10 col-lg-7 mx-auto">
@@ -12,9 +12,9 @@
                   src="https://dl.dropboxusercontent.com/s/es5sylabbcaobjr/google.png?dl=0" alt="Google" height="20"
                   class="d-inline-block mr-1" />Register With Google</a>
               <br />
-              <a class="btn btn-outline-secondary btn-block" href="{% provider_login_url 'github' %}"><img
-                  src="https://dl.dropboxusercontent.com/s/2929dbjh0nvgbgn/github.png?dl=0" alt="Github" height="20"
-                  class="d-inline-block mr-2" />Register With Github</a>
+              <a class="btn btn-outline-secondary btn-block" href="{% provider_login_url 'facebook' %}"><img
+                  src="{% static 'facebook.png' %}" alt="Facebook" height="20"
+                  class="d-inline-block mr-2" />Register With Facebook</a>
               <br />
               <a class="btn btn-outline-dark btn-block" href="{% provider_login_url 'linkedin_oauth2' %}"><img
                   src="https://dl.dropboxusercontent.com/s/yz30dq16gqmjbv1/linkedin.png?dl=0" alt="Linkedin" height="20"

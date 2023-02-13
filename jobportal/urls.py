@@ -21,6 +21,7 @@ urlpatterns = [
     path('', include('candidates.urls')),
     path('hiring/', include('recruiters.urls')),
     path('', include('pwa.urls')),
+    path('social-auth/', include('social_django.urls', namespace='social')),
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="users/password_reset.html"), name="reset_password"),
     path('reset_password_set/', auth_views.PasswordResetDoneView.as_view(template_name="users/password_reset_send.html"),name="password_reset_done"),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="users/password_reset_form.html"), name="password_reset_confirm"),

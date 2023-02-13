@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.linkedin_oauth2',
+    'allauth.socialaccount.providers.github',
     'django_cleanup.apps.CleanupConfig',
     'allauth.socialaccount.providers.facebook',
     'pwa',
@@ -237,4 +238,3 @@ STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 import os
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-

@@ -1,99 +1,67 @@
-{% extends "users/layout.html" %} {% load static %} {% block content %}
-<br /><br />
-<div style="background-color: #c8d8e4">
-  <div class="row">
+{% extends "users/layout.html" %}
+{% load static %}
+{% block content %}
+<div class="container py-5">
+    <div class="row">
     <div class="col-md-6">
-      <div style="background: transparent !important" class="jumbotron">
-        <h1 class="display-4 text-center">
-          Hire the next best candidate here!
+      <div class="jumbotron bg-transparent text-center">
+        <h1 class="display-4">
+          Simplify Your Hiring Process
         </h1>
-        <p class="lead text-center">
-          Hiring can be a tedious task. Let us make it easy for you!
+        <p class="lead">
+          Finding the right candidates made easy with our platform.
         </p>
-        <p class="lead text-center">
-          <a class="btn btn-primary btn-lg" href="{% url 'add-job' %}" role="button">Hire Now!</a>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="{% url 'add-job' %}" role="button">Get Started</a>
         </p>
       </div>
     </div>
     <div class="col-md-6">
-      <img class="img-fluid" src="https://source.unsplash.com/pKeF6Tt3c08"
-        alt="Hiring Image 2" />
+      <img class="img-fluid" src="https://source.unsplash.com/pKeF6Tt3c08" alt="Hiring Image" />
     </div>
   </div>
+
+
   <div class="row">
-    <div class="col md-6 border-right">
-      <div style="background: transparent !important" class="jumbotron">
-        <h1 class="display-5 text-center">
-          Easy to hire! Get started in a few simple steps!
-        </h1>
+    <div class="col-md-6">
+      <div class="jumbotron bg-transparent">
+        <h2 class="display-5 text-center">
+          Hassle-Free Hiring
+        </h2>
         <p class="lead text-center">
-          We make hiring as simple as possible. No more hassles. Just sign in,
-          add necessary details about the job post and you are ready to go!
+          Streamline your hiring process in just a few simple steps. Sign in, provide job details, and you're ready to go!
         </p>
       </div>
     </div>
     <div class="col-md-6">
-      <div style="background: transparent !important" class="jumbotron">
-        <h1 class="display-5 text-center">Unlimited job posts. For Free!</h1>
+      <div class="jumbotron bg-transparent">
+        <h2 class="display-5 text-center">Unlimited Job Posts for Free</h2>
         <p class="lead text-center">
-          Post any number of job posts you want for free. We do not charge you
-          for just posting jobs!
-        </p>
-      </div>
-    </div>
-  </div>
-  <!--<div class="row">
-    <div class="col md-6 border-right">
-      <div style="background: transparent !important" class="jumbotron">
-        <h1 class="display-5 text-center">
-          Want to get results faster? Go Premium!
-        </h1>
-        <p class="lead text-center">
-          Job Posts of premium users enjoy more visibility and thus get more
-          applicants in a shorter period of time!<br /><br />All of this for a
-          small fee only!
-        </p>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div style="background: transparent !important" class="jumbotron">
-        <h1 class="display-5 text-center">
-          Get recommended candidates for your job!
-        </h1>
-        <p class="lead text-center">
-          Get candidates recommendation for each job post and make your hiring
-          much faster by directly contacting them.<br /><br /><i>Available in free plan for a limited time!</i>
-        </p>
-      </div>
-    </div>
-  </div>-->
-  <div class="row">
-    <div class="col-sm-10 md-8 lg-6 mx-auto">
-      <div style="background: transparent !important" class="jumbotron">
-        <h1 class="display-5 text-center">
-          Search through the candidate database!
-        </h1>
-        <p class="lead text-center">
-          Search and see resumes of every candidate on our database. Get the
-          best candidate suitable for your jobs and directly contact them
-          resulting in fast hires!<br /><br /><i>Avaialable in free plan for a limited time!</i>
+          Post as many job listings as you need without any charges. We believe in making hiring accessible to all.
         </p>
       </div>
     </div>
   </div>
+
   <div class="row">
-    <div class="col-sm-10 md-8 lg-6 mx-auto">
-      <div style="background: transparent !important" class="jumbotron">
-        <h1 class="display-5 text-center">More features coming soon!</h1>
+    <div class="col-md-6">
+      <div class="jumbotron bg-transparent">
+        <h2 class="display-5 text-center">
+          Search Candidates with Ease
+        </h2>
         <p class="lead text-center">
-          We believe in making the hiring process easier. Thus, we will keep
-          adding new features as we progress and will continue to help you in
-          hiring the best talents!<br /><br />So, what are you waiting for? Get
-          the early access benefits and enjoy premium services for free for a
-          limited time!
+          Access our candidate database to find the perfect match for your job. Directly connect with potential hires.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="jumbotron bg-transparent">
+        <h2 class="display-5 text-center">More Features Coming Soon</h2>
+        <p class="lead text-center">
+          We're committed to making hiring even better. Stay tuned for upcoming features and enjoy premium services for free during the early access period.
         </p>
         <p class="lead text-center">
-          <a class="btn btn-primary btn-lg" href="{% url 'add-job' %}" role="button">Post jobs now!</a>
+          <a class="btn btn-primary btn-lg" href="{% url 'add-job' %}" role="button">Start Hiring</a>
         </p>
       </div>
     </div>

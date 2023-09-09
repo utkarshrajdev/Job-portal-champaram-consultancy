@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 #client id=168732822043-gpdk8j8386s8gk8peivjmhi84tftntu0.apps.googleusercontent.com
 #client secret=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
 from pathlib import Path
-
+import dj_database_url
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#&y#8_iy_gr=0mqcp6%imdr@5uj^*1radhwp%)ml74_$#j^!83'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*','127.0.0.1', 'localhost']
 
@@ -106,13 +107,20 @@ WSGI_APPLICATION = 'jobportal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+# Get the 'DATABASE_URL' environment variable, or use a fallback URL if it's not set
+database_url = os.environ.get('DATABASE_URL', 'postgres://champaram_consultancy_user:TiyGduihxkoee5SDRyrZadZuP8UCeLXy@dpg-cjucmp95mpss73dc56kg-a.oregon-postgres.render.com/champaram_consultancy')
 
+# Parse the database URL
+db_from_env = dj_database_url.config(default=database_url)
+DATABASES = {
+    'default': db_from_env,
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -147,8 +155,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-#STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -217,7 +223,8 @@ SOCIALACCOUNT_PROVIDERS = {
 SOCIALACCOUNT_QUERY_EMAIL = True
 
 LOGIN_REDIRECT_URL = '/'
-STATIC_URL = "static/"
+STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #STATIC_ROOT = BASE_DIR / "users/static/"
 

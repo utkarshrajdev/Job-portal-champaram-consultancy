@@ -218,7 +218,7 @@ def profile_view(request, slug):
 
 def candidate_details(request):
     revdata=Testimonial.objects.all().order_by('-date_posted')[:9]
-    object_list = Job.objects.all()[:9]
+    object_list = Job.objects.all()[:3]
     data={
         'candidate_home': "active",
         'revdata':revdata,

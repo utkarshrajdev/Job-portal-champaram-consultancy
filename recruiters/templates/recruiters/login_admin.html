@@ -44,16 +44,18 @@
                   </div>
 
                   <div class="mt-4">
-                    <div class="d-flex justify-content-center links">
-                      Don't have an account? <a href="{% url 'register' %}" class="ml-2">Sign Up</a>
+                    <div class="d-flex justify-content-center flex-column align-items-center text-center">
+                        <p class="mb-2">Don't have an account?</p>
+                        <a href="{% url 'register' %}" class="ml-2 btn btn-link">Sign Up</a>
                     </div>
-                    <div class="mt-4">
-                      <div class="d-flex justify-content-center links">
-                        Forget password? <a href="{% url 'reset_password' %}" class="ml-2">Reset password</a>
-                      </div>
-
+                    <div class="mt-2">
+                        <div class="d-flex justify-content-center flex-column align-items-center text-center">
+                            <p class="mb-2">Forget password?</p>
+                            <a href="{% url 'reset_password' %}" class="ml-2 btn btn-link">Reset password</a>
+                        </div>
                     </div>
-                  </div>
+                </div>
+                
                 </div>
               </div>
 

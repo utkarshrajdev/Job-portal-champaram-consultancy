@@ -1,81 +1,75 @@
-{% extends "users/layout.html" %} {% load socialaccount %} {% load static %} {% block content %}
+{% extends "users/layout.html" %}
+{% load socialaccount %}
+{% load static %}
+
+{% block content %}
 <br>
-<div class="container" >
-  <div class="row" >
-    <div class="col-sm-10 col-md-10 col-lg-7 mx-auto" >
-      <div class="card card-signin my-5" style="background-color: #f2f2f2;">
-        <div class="card-body">
-          <h3 class="text-center"><b>Login</b></h3>
-          <br />
-          <form class="form-signin">
-            <div class="form-group">
-              <a class="btn btn-outline-secondary btn-block" href="{% provider_login_url 'google' %}"><img
-                  src="https://dl.dropboxusercontent.com/s/es5sylabbcaobjr/google.png?dl=0" alt="Google" height="20"
-                  class="d-inline-block mr-1" />Sign In With Google</a>
-              <br />
-              <!-- <a class="btn btn-outline-dark btn-block" href="{% provider_login_url 'facebook' %}">
-                <img src="{% static 'facebook.png' %}" alt="Facebook" height="20" class="d-inline-block mr-2" />
-                Sign In With Facebook
-            </a>
-              <br />
-              <a class="btn btn-outline-dark btn-block" href="{% provider_login_url 'linkedin_oauth2' %}"><img
-                  src="https://dl.dropboxusercontent.com/s/yz30dq16gqmjbv1/linkedin.png?dl=0" alt="Linkedin" height="20"
-                  class="d-inline-block mr-2" />Sign In With LinkedIn</a> -->
-            </div>
-            <!-- <h4 class="text-center">or</h3> -->
-              <hr my-2 />
-              <form></form>
-              <div class="container h-100">
-                <div class="d-flex justify-content-center h-100">
-                  <div class="user_card">
-                    <div class="d-flex justify-content-center">
-
-
-                      <h3 id="form-title">LOGIN</h3>
-                    </div>
-                    <div class="d-flex justify-content-center form_container">
-                      <form method="POST" action="">
-                        {% csrf_token %}
-                        <div class="input-group mb-3">
-                          <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-user"></i></span>
-                          </div>
-                          <input type="text" name="username" placeholder="Username..." class="form-control">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-lg-7 mx-auto">
+            <div class="card card-signin my-5" style="background-color: #f2f2f2;">
+                <div class="card-body">
+                    <h3 class="text-center"><b>Login</b></h3>
+                    <br />
+                    <form class="form-signin">
+                        <div class="form-group">
+                            <a class="btn btn-outline-secondary btn-block" href="{% provider_login_url 'google' %}">
+                                <img src="https://dl.dropboxusercontent.com/s/es5sylabbcaobjr/google.png?dl=0" alt="Google" height="20" class="d-inline-block mr-1" />Sign In With Google
+                            </a>
+                            <br />
+                            <!-- Add more social media login buttons here -->
                         </div>
-                        <div class="input-group mb-2">
-                          <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-key"></i></span>
-                          </div>
-                          <input type="password" name="password" placeholder="Password..." class="form-control">
+                        <hr my-2 />
+                        <form></form>
+                        <div class="container h-100">
+                            <div class="d-flex justify-content-center h-100">
+                                <div class="user_card">
+                                    <div class="d-flex justify-content-center">
+                                        <h3 id="form-title">LOGIN</h3>
+                                    </div>
+                                    <div class="d-flex justify-content-center form_container">
+                                        <form method="POST" action="">
+                                            {% csrf_token %}
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                </div>
+                                                <input type="text" name="username" placeholder="Username..." class="form-control">
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                                </div>
+                                                <input type="password" name="password" placeholder="Password..." class="form-control">
+                                            </div>
+                                            {% for message in messages %}
+                                            <p id="messages">{{ message }}</p>
+                                            {% endfor %}
+                                            <div class="d-flex justify-content-center mt-3 login_container">
+                                                <input class="btn login_btn" type="submit" value="Login">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="mt-4">
+                                      <div class="d-flex justify-content-center flex-column align-items-center text-center">
+                                          <p class="mb-2">Don't have an account?</p>
+                                          <a href="{% url 'register' %}" class="ml-2 btn btn-link">Sign Up</a>
+                                      </div>
+                                      <div class="mt-2">
+                                          <div class="d-flex justify-content-center flex-column align-items-center text-center">
+                                              <p class="mb-2">Forget password?</p>
+                                              <a href="{% url 'reset_password' %}" class="ml-2 btn btn-link">Reset password</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  
+                                </div>
+                            </div>
                         </div>
-                        {% for message in messages %}
-                        <p id="messages">{{message}}</p>
-                        {% endfor %}
-                        <div class="d-flex justify-content-center mt-3 login_container">
-                          <input class="btn login_btn" type="submit" value="Login">
-                        </div>
-                      </form>
-
-                    </div>
-
-                    <div class="mt-4">
-                      <div class="d-flex justify-content-center links">
-                        Don't have an account? <a href="{% url 'register' %}" class="ml-2">Sign Up</a>
-                      </div>
-                      <div class="mt-4">
-                        <div class="d-flex justify-content-center links">
-                          Forget password? <a href="{% url 'reset_password' %}" class="ml-2">Reset password</a>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
+                    </form>
                 </div>
-
-              </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-  {% endblock %}
+{% endblock %}

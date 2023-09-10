@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#&y#8_iy_gr=0mqcp6%imdr@5uj^*1radhwp%)ml74_$#j^!83'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*','127.0.0.1', 'localhost']
 
@@ -114,7 +114,7 @@ WSGI_APPLICATION = 'jobportal.wsgi.application'
 #     }
 # }
 # Get the 'DATABASE_URL' environment variable, or use a fallback URL if it's not set
-database_url = os.environ.get('DATABASE_URL', 'postgres://champaram_consultancy_user:TiyGduihxkoee5SDRyrZadZuP8UCeLXy@dpg-cjucmp95mpss73dc56kg-a.oregon-postgres.render.com/champaram_consultancy')
+database_url = os.environ.get('DATABASE_URL', 'postgres://champaram_consultancy_5igs_user:m7UKjbhppsArwD2ZedRdSMcd79akoEZf@dpg-cjuqefh5mpss73f3sfhg-a.singapore-postgres.render.com/champaram_consultancy_5igs')
 
 # Parse the database URL
 db_from_env = dj_database_url.config(default=database_url)

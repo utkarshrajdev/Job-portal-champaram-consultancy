@@ -107,20 +107,20 @@ WSGI_APPLICATION = 'jobportal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-# Get the 'DATABASE_URL' environment variable, or use a fallback URL if it's not set
-# database_url = os.environ.get('DATABASE_URL', 'postgres://champaram_consultancy_user:TiyGduihxkoee5SDRyrZadZuP8UCeLXy@dpg-cjucmp95mpss73dc56kg-a.oregon-postgres.render.com/champaram_consultancy')
-
-# # Parse the database URL
-# db_from_env = dj_database_url.config(default=database_url)
 # DATABASES = {
-#     'default': db_from_env,
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # }
+# Get the 'DATABASE_URL' environment variable, or use a fallback URL if it's not set
+database_url = os.environ.get('DATABASE_URL', 'postgres://champaram_consultancy_user:TiyGduihxkoee5SDRyrZadZuP8UCeLXy@dpg-cjucmp95mpss73dc56kg-a.oregon-postgres.render.com/champaram_consultancy')
+
+# Parse the database URL
+db_from_env = dj_database_url.config(default=database_url)
+DATABASES = {
+    'default': db_from_env,
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

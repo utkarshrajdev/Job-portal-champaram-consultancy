@@ -3,7 +3,7 @@
 
 <div>
   <form class="form-signin mt-4" action="{% url 'job-search-list' %}" method="get">
-    <!-- <div class="row">
+    <div class="row">
       <div class="col-md-6">
         <input name="p" type="text" class="form-control" placeholder="Enter Job Title, Skills, Type or Company" /><br />
       </div>
@@ -15,7 +15,7 @@
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Search Jobs
       </button>
-    </div> -->
+    </div>
   </form>
   <hr my-2 />
   {%if jobs %}

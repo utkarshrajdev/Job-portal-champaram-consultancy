@@ -13,11 +13,13 @@
               <b>{{job.title}} ({{job.job_type}})</b>
             </h4>
           </a>
-          <p style="font-size: 17px">{{job.company}}<br />{{job.location}}</p>
-          <p style="font-size: 15px">
-            {{job.description|truncatewords:30}} -
-            <a href="{% url 'job-detail' job.slug %}">Read More</a>
+          <p class="text-secondary">
+            {{job.company}}<br />{{job.location}}
           </p>
+          <p class="text-dark">
+            {{job.description|truncatewords_html:8|safe}}
+          </p>
+          <a href="{% url 'job-detail' job.slug %}" class="btn btn-primary">Read More</a>
         </span>
         <div class="card-footer">
           <span style="font-size: 18px">You have <b class="text-success">{{ common }} </b>out of <b

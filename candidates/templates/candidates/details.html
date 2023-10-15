@@ -9,25 +9,45 @@
   <section class="latest-jobs py-5">
     <div class="container">
       <div class="text-center">
-        <h1 class="display-4 mb-4">Latest Jobs</h1>
+        <h1 class="display-4 mb-4 text-center">
+          <span style="color: #2b6777">Latest</span>
+          <span style="color: #007BFF">Jobs</span>
+      </h1>
+      
       </div>
       <div class="row">
-        {% for n in object_list %}
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title text-muted text-uppercase text-center">{{ n.title }} ({{ n.job_type }})</h5>
-              <p style="font-size: 17px">{{ n.company }}<br>{{ n.location }}</p>
-              <p style="font-size: 15px">{{ n.description|truncatewords:10 }} - <a href="/job/{{ n.slug }}">Read
-                  More</a></p>
-            </div>
-            <div class="card-footer">
-              <span style="font-size: 14px">Posted on {{ n.date_posted }}</span>
-            </div>
-          </div>
+        <div class="col-md-12">
+            <ul class="list-group">
+                {% for n in object_list %}
+                <li class="list-group-item" style="background-color: #2b6777;">
+                    <div class="card shadow" style="background-color: #C8D8E4;">
+                        <div class="card-body">
+                            <a href="{% url 'job-detail' n.slug %}">
+                                <h4 class="text-dark">
+                                    <b>{{ n.title }} ({{ n.job_type }})</b>
+                                </h4>
+                            </a>
+                            <p class="card-text" style="font-size: 17px; color: #007BFF;">
+                                {{ n.company }} - {{ n.location }}
+                            </p>
+                            <p class="card-text">{{ n.description|truncatewords:10 }}</p>
+                            <a href="/job/{{ n.slug }}" class="btn" style="background-color: #007BFF; color: #FFFFFF;">Read More</a>
+                        </div>
+                        <div class="card-footer bg-light d-flex justify-content-between" style="background-color: #007BFF;">
+                            <small class="text-muted">Posted on {{n.date_posted|date:"F d, Y"}}</small>
+                            <div>
+                                <i class="fas fa-heart text-danger me-2"></i>
+                                <i class="fas fa-share-alt text-info"></i>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
-        {% endfor %}
-      </div>
+    </div>
+    
+    
       <div class="text-center mt-4">
         <a href="{% url 'job-search-list' %}" class="btn btn-primary btn-lg">More Jobs</a>
       </div>
@@ -40,14 +60,15 @@
   <section class="testimonial py-5">
     <div class="container">
         <div class="text-center">
-            <h1 class="display-4 mb-4">Leetcode Top Interview 150</h1>
-            <hr class="my-2">
-        </div>
+          <h1 class="display-4 mb-4 text-center">
+            <span style="color: #2b6777">Leetcode Top</span>
+            <span style="color: #007BFF">Interview 150</span>
+          </h1>
 
-        <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+        <div id="vedioCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 {% for n in revdata %}
-                <li data-target="#testimonialCarousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" {% endif %}></li>
+                <li data-target="#vedioCarousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" {% endif %}></li>
                 {% endfor %}
             </ol>
 
@@ -64,7 +85,7 @@
                         </div>
                         <div class="col-md-5">
                           <div class="testimonial-text-container">
-                              <p class="testimonial-text d-none d-md-block">{{ n.review|truncatewords:50 }}</p>
+                              <p class="testimonial-text d-none d-md-block" style="color: #2b6777;">{{ n.review|truncatewords:50 }}</p>
                               <p class="testimonial-author d-none d-md-block">- {{ n.full_name }}, {{ n.profession }}</p>
                           </div>
                       </div>                      
@@ -73,11 +94,11 @@
                 {% endfor %}
             </div>
 
-            <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#vedioCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#vedioCarousel" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
@@ -86,6 +107,58 @@
             <a href="https://www.youtube.com/playlist?list=PLipROcllwzXgahMxqJIbG254OQQ8lK-tG" class="btn btn-primary btn-lg">More Video</a>
         </div>
     </div>
+</section>
+
+<section class="testimonial py-5">
+  <div class="container">
+      <div class="text-center">
+        <h1 class="display-4 mb-4 text-center">
+          <span style="color: #2b6777">Testimonial</span>
+        </h1>
+
+      <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+              {% for n in revdata %}
+              <li data-target="#testimonialCarousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" {% endif %}></li>
+              {% endfor %}
+          </ol>
+
+          <div class="carousel-inner">
+              {% for n in revdata %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                  <div class="row">
+                      <div class="col-md-2">
+                        <div class="testimonial-video-container">
+                          <i class="fas fa-user-circle fa-5x"></i> <!-- Replace "fas fa-user-circle" with the class of your desired icon -->
+                        </div>                        
+                      </div>
+                      <div class="col-md-10">
+                        <div class="testimonial-text-container">
+                            <p class="testimonial-text d-none d-md-block" style="color: #2b6777;">{{ n.review|truncatewords:25 }}</p>
+                            <p class="testimonial-author d-none d-md-block">- {{ n.full_name }}, {{ n.profession }}</p>
+                        </div>
+                        <br>
+                        <br>
+                    </div>                      
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+
+          <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        
+      </div>
+      <!-- <div class="text-center mt-4">
+          <a href="https://www.youtube.com/playlist?list=PLipROcllwzXgahMxqJIbG254OQQ8lK-tG" class="btn btn-primary btn-lg">More Video</a>
+      </div> -->
+  </div>
 </section>
 
 </div>

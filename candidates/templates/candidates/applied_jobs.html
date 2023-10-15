@@ -17,9 +17,9 @@
             {{job.job.company}}<br />{{job.job.location}}
           </p>
           <p style="font-size: 15px">
-            {{job.job.description|truncatewords:30}} -
-            <a href="{% url 'job-detail' job.job.slug %}">Read More</a>
+            {{job.job.description|truncatewords:8|safe}} 
           </p>
+          <a href="{% url 'job-detail' job.job.slug %}" class="btn btn-primary">Read More</a>
         </span>
         <div class="card-footer">
           {% if status == 0 %}

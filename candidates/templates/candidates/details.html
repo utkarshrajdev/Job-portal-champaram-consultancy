@@ -110,56 +110,57 @@
 </section>
 
 <section class="testimonial py-5">
-  <div class="container">
-      <div class="text-center">
-        <h1 class="display-4 mb-4 text-center">
-          <span style="color: #2b6777">Testimonial</span>
-        </h1>
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4 mb-4 text-center">
+                <span style="color: #2b6777">Testimonial</span>
+            </h1>
 
-      <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-              {% for n in revdata %}
-              <li data-target="#testimonialCarousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" {% endif %}></li>
-              {% endfor %}
-          </ol>
+            <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    {% for n in revdata %}
+                    <li data-target="#testimonialCarousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" {% endif %}></li>
+                    {% endfor %}
+                </ol>
 
-          <div class="carousel-inner">
-              {% for n in revdata %}
-              <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                  <div class="row">
-                      <div class="col-md-2">
-                        <div class="testimonial-video-container">
-                          <i class="fas fa-user-circle fa-5x"></i> <!-- Replace "fas fa-user-circle" with the class of your desired icon -->
-                        </div>                        
-                      </div>
-                      <div class="col-md-10">
-                        <div class="testimonial-text-container">
-                            <p class="testimonial-text d-none d-md-block" style="color: #2b6777;">{{ n.review|truncatewords:25 }}</p>
-                            <p class="testimonial-author d-none d-md-block">- {{ n.full_name }}, {{ n.profession }}</p>
+                <div class="carousel-inner">
+                    {% for n in revdata %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="testimonial-video-container d-md-block">
+                                    <i class="fas fa-user-circle fa-5x"></i> <!-- Replace "fas fa-user-circle" with the class of your desired icon -->
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="testimonial-text-container">
+                                    <p class="testimonial-text d-md-none" style="color: #2b6777;">{{ n.review|truncatewords:25 }}</p>
+                                    <p class="testimonial-author d-md-none">- {{ n.full_name }}, {{ n.profession }}</p>
+                                    <p class="testimonial-text d-none d-md-block" style="color: #2b6777;">{{ n.review|truncatewords:25 }}</p>
+                                    <p class="testimonial-author d-none d-md-block">- {{ n.full_name }}, {{ n.profession }}</p>
+                                </div>
+                                <br>
+                                <br>
+                            </div>
                         </div>
-                        <br>
-                        <br>
-                    </div>                      
-                  </div>
-              </div>
-              {% endfor %}
-          </div>
+                    </div>
+                    {% endfor %}
+                </div>
 
-          <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-        
-      </div>
-      <!-- <div class="text-center mt-4">
-          <a href="https://www.youtube.com/playlist?list=PLipROcllwzXgahMxqJIbG254OQQ8lK-tG" class="btn btn-primary btn-lg">More Video</a>
-      </div> -->
-  </div>
+                <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+
+            </div>
+        </div>
+    </div>
 </section>
+
 
 </div>
   {% endblock content %}

@@ -43,10 +43,11 @@
 <body>
   {% if not rec_navbar %}
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top ">
-    <a class="navbar-brand ml-auto" href="{% url 'detail-candidates' %}">
-      <img src="{% static 'logo.png' %}" width="191" height="36" class="d-inline-block align-top mr-3"
-        alt="" /><b></b>
-    </a>
+    <a class="navbar-brand ml-auto" href="{% url 'detail-candidates' %}" style="background-color: white; display: inline-block; padding: 10px;">
+      <img src="{% static 'logo1.png' %}" width="191" height="36" class="d-inline-block align-top mr-3" alt="" />
+      <b></b>
+  </a>
+  
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

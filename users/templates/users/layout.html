@@ -56,7 +56,7 @@
       <div class="navbar-nav ml-auto">
         <a class="nav-item nav-link {{ candidate_home }}" href="{% url 'detail-candidates' %}">Home</a>
         <a class="nav-item nav-link {{ home_page }}" href="{% url 'home' %}">Job Search</a>
-        <a class="nav-item nav-link {{ intel_page }}" href="{% url 'intelligent-search' %}">Get Relevant Jobs</a>
+        <!-- <a class="nav-item nav-link {{ intel_page }}" href="{% url 'intelligent-search' %}">Get Relevant Jobs</a> -->
         <a class="nav-item nav-link {{ profile_page }}" href="{% url 'my-profile' %}">My Profile</a>
         <a class="nav-item nav-link {{ account_page }}" href="{% url 'account' %}">My Account</a>
         {% if user.is_authenticated %}

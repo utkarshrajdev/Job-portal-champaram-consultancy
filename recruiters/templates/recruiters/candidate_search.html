@@ -1,107 +1,212 @@
-{% extends "users/layout.html" %} {% load static %} {% block content %}
-<br />
-<div>
-  <h3 class="text-center">
-    <b>Search Candidates</b>
-  </h3>
-  <form
-    class="form-signin mt-4"
-    action="{% url 'search-candidates' %}"
-    method="get"
-  >
-    <div class="row">
-      <div class="col-md-6">
-        <input
-          name="r"
-          type="text"
-          class="form-control"
-          placeholder="Enter Location of Choice"
-        /><br />
-      </div>
-      <div class="col-md-6">
-        <input
-          name="s"
-          type="text"
-          class="form-control"
-          placeholder="For Job Type (Full Time, Intern etc.)"
-        /><br />
+{% extends "users/layout.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid py-5 bg-light">
+  <!-- Header Section with Custom Background -->
+  <div class="row mb-5">
+    <div class="col-12 text-center">
+      <div class="px-3 py-4 bg-white rounded shadow-sm">
+        <h2 class="font-weight-bold text-primary">
+          <i class="fas fa-search mr-2"></i>Search Candidates
+        </h2>
+        <p class="text-muted mb-0">Find the perfect candidate for your organization</p>
       </div>
     </div>
-    <div class="form-group">
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Apply Filters
-      </button>
+  </div>
+
+  <!-- Search Form with Animated Effects -->
+  <div class="row justify-content-center mb-5">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-lg">
+        <div class="card-body p-4">
+          <form action="{% url 'search-candidates' %}" method="get">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-primary text-white">
+                      <i class="fas fa-map-marker-alt"></i>
+                    </span>
+                  </div>
+                  <input 
+                    name="r" 
+                    type="text" 
+                    class="form-control form-control-lg shadow-none" 
+                    placeholder="Location"
+                  >
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-primary text-white">
+                      <i class="fas fa-briefcase"></i>
+                    </span>
+                  </div>
+                  <input 
+                    name="s" 
+                    type="text" 
+                    class="form-control form-control-lg shadow-none" 
+                    placeholder="Job Type"
+                  >
+                </div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary btn-lg btn-block shadow-sm" type="submit">
+                  <i class="fas fa-search mr-2"></i>Search Candidates
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  </form>
+  </div>
+
+  <!-- Results Section -->
   {% if profiles %}
   <div class="row">
     {% for profile in profiles %}
-    <div class="col-md-4">
-      <div class="card card-signin my-2">
-        <span class="ml-3 mt-3">
-          <a href="{% url 'profile-view' profile.slug %}">
-            {% if profile.full_name %}
-            <h4 class="text-dark">
-              <b>{{profile.full_name}}</b>
-            </h4>
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card h-100 border-0 shadow-sm hover-card">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-3">
+            <div class="profile-avatar mr-3">
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                <span class="h4 mb-0">{{profile.full_name|default:profile.user.username|make_list|first|upper}}</span>
+              </div>
+            </div>
+            <div>
+              <a href="{% url 'profile-view' profile.slug %}" class="text-decoration-none">
+                <h5 class="font-weight-bold text-dark mb-1">
+                  {% if profile.full_name %}
+                    {{profile.full_name}}
+                  {% else %}
+                    {{profile.user.username}}
+                  {% endif %}
+                </h5>
+              </a>
+              <p class="text-muted mb-0 small">
+                <i class="fas fa-envelope mr-2"></i>{{profile.user.email}}
+              </p>
+            </div>
+          </div>
+          <div class="badge badge-light mb-2">
+            <i class="fas fa-map-marker-alt mr-1"></i>
+            {% if profile.location %}
+              {{profile.location}}
             {% else %}
-            <h4 class="text-dark">
-              <b>{{profile.user.username}}</b>
-            </h4>
+              {{profile.country.name}}
             {% endif %}
-          </a>
-          <p style="font-size: 17px">
-            {{profile.user.email}}<br />{% if profile.location %}
-            {{profile.location}} {% else %} {{profile.country.name}} {% endif %}
-          </p>
-        </span>
-        <div class="card-footer">
+          </div>
+        </div>
+        <div class="card-footer bg-white border-top-0">
           {% if profile.resume %}
-          <a href="{{ profile.resume.url }}">Click to view resume</a>
+            <a href="{{ profile.resume.url }}" class="btn btn-outline-primary btn-block">
+              <i class="fas fa-file-alt mr-2"></i>Download Resume
+            </a>
           {% else %}
-          <p>No resume available.</p>
+            <p class="text-muted mb-0 text-center small">
+              <i class="fas fa-info-circle mr-2"></i>No resume available
+            </p>
           {% endif %}
         </div>
       </div>
     </div>
     {% endfor %}
   </div>
-  <br />
-  <div class="pagination">
-    <span class="step-links">
-      {% if profiles.has_previous %}
-      <a
-        class="btn btn-info"
-        href="?page=1{% if request.GET.r %}&p={{ request.GET.r }}{% endif %}{% if request.GET.s %}&q={{ request.GET.s }}{% endif %}"
-        >&laquo; First</a
-      >
-      <a
-        class="btn btn-danger"
-        href="?page={{ profiles.previous_page_number }}{% if request.GET.r %}&p={{ request.GET.r }}{% endif %}{% if request.GET.s %}&q={{ request.GET.s }}{% endif %}"
-        >Prev</a
-      >
-      {% endif %}
-      <span class="current">
-        Page {{ profiles.number }} of {{ profiles.paginator.num_pages }}.
-      </span>
-      {% if profiles.has_next %}
-      <a
-        class="btn btn-success"
-        href="?page={{ profiles.next_page_number }}{% if request.GET.r %}&p={{ request.GET.r }}{% endif %}{% if request.GET.s %}&q={{ request.GET.s }}{% endif %}"
-        >Next</a
-      >
-      <a
-        class="btn btn-primary"
-        href="?page={{ profiles.paginator.num_pages }}{% if request.GET.r %}&p={{ request.GET.r }}{% endif %}{% if request.GET.s %}&q={{ request.GET.s }}{% endif %}"
-        >Last &raquo;</a
-      >
-      {% endif %}
-    </span>
-  </div>
 
+  <!-- Pagination -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+          {% if profiles.has_previous %}
+            <li class="page-item">
+              <a class="page-link rounded-pill mr-2" href="?page=1{% if request.GET.r %}&p={{ request.GET.r }}{% endif %}{% if request.GET.s %}&q={{ request.GET.s }}{% endif %}">
+                <i class="fas fa-angle-double-left"></i>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link rounded-pill mr-2" href="?page={{ profiles.previous_page_number }}{% if request.GET.r %}&p={{ request.GET.r }}{% endif %}{% if request.GET.s %}&q={{ request.GET.s }}{% endif %}">
+                Previous
+              </a>
+            </li>
+          {% endif %}
+
+          <li class="page-item active">
+            <span class="page-link rounded-pill">
+              {{ profiles.number }} / {{ profiles.paginator.num_pages }}
+            </span>
+          </li>
+
+          {% if profiles.has_next %}
+            <li class="page-item">
+              <a class="page-link rounded-pill ml-2" href="?page={{ profiles.next_page_number }}{% if request.GET.r %}&p={{ request.GET.r }}{% endif %}{% if request.GET.s %}&q={{ request.GET.s }}{% endif %}">
+                Next
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link rounded-pill ml-2" href="?page={{ profiles.paginator.num_pages }}{% if request.GET.r %}&p={{ request.GET.r }}{% endif %}{% if request.GET.s %}&q={{ request.GET.s }}{% endif %}">
+                <i class="fas fa-angle-double-right"></i>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </div>
   {% else %}
-  <p class="text-center">No candidates found!</p>
-  <br />
+  <div class="row">
+    <div class="col-12 text-center">
+      <div class="alert alert-info shadow-sm" role="alert">
+        <i class="fas fa-info-circle mr-2"></i>No candidates found matching your criteria
+      </div>
+    </div>
+  </div>
   {% endif %}
 </div>
+
+<style>
+.hover-card {
+  transition: all 0.3s ease;
+}
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15)!important;
+}
+.form-control-lg {
+  border-radius: 0.3rem;
+}
+.input-group-text {
+  border: none;
+}
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: none;
+}
+.badge {
+  padding: 0.5em 1em;
+  font-weight: normal;
+}
+.page-link {
+  border: none;
+  padding: 0.75rem 1rem;
+  color: #007bff;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,.15);
+}
+.page-link:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+.page-item.active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+.alert {
+  border: none;
+  border-radius: 0.5rem;
+}
+</style>
 {% endblock content %}

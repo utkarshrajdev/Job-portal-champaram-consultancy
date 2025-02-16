@@ -16,212 +16,182 @@
 
   <link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/s/ecyb1drs5j1jyjf/styles.css?dl=0" />
   <link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/s/xmxsoypfvfvsisb/footer.css?dl=0" />
-  <!--login /register css javascropt link and css-->
-   <!----->
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'layout.css' %}">
 
   {% block cssfiles %}{% endblock cssfiles %}
   <title>Champaran Consultancy</title>
   <style>
-    .carousel-container {
-    position: relative;
-}
-
-.search-form {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0); /* Adjust the opacity as needed */
-    padding: 20px;
-    transition: background-color 0.3s; /* Optional: Add a smooth transition effect */
-}
-    .highlight {
-        background-color: #28a745; /* Green background */
-        color: #fff !important; /* White text */
-        border-radius: 4px;
-        padding: 10px 15px;
-        transition: background-color 0.3s, color 0.3s;
+    /* Header Styles */
+    .navbar {
+      background-color: #fff; /* White background */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      padding: 10px 20px; /* Fixed padding */
     }
 
-    .highlight:hover {
-        background-color: #218838; /* Darker green on hover */
-        color: #fff !important;
-    }
-
-    .register-highlight {
-        background-color: #fd7e14; /* Orange background */
-        color: #fff !important; /* White text */
-        border-radius: 4px;
-        padding: 10px 15px;
-        transition: background-color 0.3s, color 0.3s;
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-
-    .register-highlight:hover {
-        background-color: #e67300; /* Darker orange on hover */
-        color: #fff !important;
-    }
-
-    .login-highlight {
-        background-color: #007bff; /* Blue background */
-        color: #fff !important; /* White text */
-        border-radius: 4px;
-        padding: 10px 15px;
-        transition: background-color 0.3s, color 0.3s;
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-
-    .login-highlight:hover {
-        background-color: #0056b3; /* Darker blue on hover */
-        color: #fff !important;
-    }
-
-    .logout-highlight {
-        background-color: #dc3545; /* Red background */
-        color: #fff !important; /* White text */
-        border-radius: 4px;
-        padding: 10px 15px;
-        transition: background-color 0.3s, color 0.3s;
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-
-    .logout-highlight:hover {
-        background-color: #c82333; /* Darker red on hover */
-        color: #fff !important;
-    }
-
-    /* .navbar {
-        background-color: #343a40;
-        padding: 10px 15px;
-    } */
-
-    .nav-item {
-        margin: 0 5px;
+    .navbar-brand img {
+      height: 36px;
+      width: auto;
     }
 
     .nav-link {
-        color: #f8f9fa;
-        text-decoration: none;
-        padding: 10px 15px;
-        transition: color 0.3s;
+      color: #343a40 !important; /* Dark text */
+      font-weight: 500;
+      padding: 10px 15px;
+      transition: color 0.3s;
     }
 
     .nav-link:hover {
-        color: #d4d4d4;
+      color: #2b6777 !important; /* Blue on hover */
     }
-</style>
 
-</style>
+    .navbar-toggler {
+      border: none;
+    }
 
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 123, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    }
+
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown-item {
+      color: #343a40;
+      padding: 8px 16px;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown-item:hover {
+      background-color: #f8f9fa;
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: #2b6777; /* Themed background color */
+      color: #fff;
+      padding: 40px 20px; /* Fixed padding */
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: #007bff;
+    }
+
+    .footer-navigation h3 {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .footer-contacts-icon {
+      margin-right: 10px;
+    }
+
+    .social-links a {
+      color: #fff;
+      margin-right: 10px;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #007bff;
+    }
   </style>
 </head>
 
 <body>
+  <!-- Header -->
   {% if not rec_navbar %}
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top ">
-    <a class="navbar-brand ml-auto" href="{% url 'detail-candidates' %}" ">
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <a class="navbar-brand ml-auto" href="{% url 'detail-candidates' %}">
       <img src="{% static 'logo.png' %}" width="191" height="36" class="d-inline-block align-top mr-3" alt="" />
-      <b></b>
-  </a>
-  
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
-      <div class="navbar-nav ml-auto">
-        <a class="nav-item nav-link {{ candidate_home }}" href="{% url 'detail-candidates' %}">Home</a>
-        <a class="nav-item nav-link {{ home_page }}" href="{% url 'home' %}">Job Search</a>
-        <a class="nav-item nav-link {{ intel_page }}" href="{% url 'intelligent-search' %}">Get Relevant Jobs</a>
-        <a class="nav-item nav-link {{ profile_page }}" href="{% url 'my-profile' %}">My Profile</a>
-        <a class="nav-item nav-link {{ account_page }}" href="{% url 'account' %}">My Account</a>
-        {% if user.is_authenticated %}
-        <a class="nav-item nav-link logout-highlight" href="{% url 'logout' %}">Logout</a>
-        <!-- <a class="nav-item nav-link highlight" href="{% url 'add-job' %}">Recruiters</a> -->
-        {% else %}
-        <a class="nav-item nav-link login-highlight" href="{% url 'login' %}">Login</a>
-        <a class="nav-item nav-link register-highlight" href="{% url 'register' %}">Register</a>
-      
-        <a class="nav-item nav-link highlight" href="{% url 'adminlogin' %}">Recruiters</a>
-        {% endif %}
-      </div>
-    </div>
-  </nav>
-  {% else %}
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <a class="navbar-brand" href="{% url 'detail-candidates' %}">
-      <!-- <a class="navbar-brand" href="{% url 'detail-recruiters' %}"> -->
-      <img src="{% static 'logo.png' %}" width="191" height="36"
-        class="d-inline-block align-top mr-3" alt="" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <!-- <a class="nav-item nav-link {{ rec_details }}" href="{% url 'detail-recruiters' %}">Home</a> -->
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link {{ candidate_home }}" href="{% url 'detail-candidates' %}">Home</a>
+        <a class="nav-item nav-link {{ home_page }}" href="{% url 'home' %}">Job Search</a>
+        <a class="nav-item nav-link {{ intel_page }}" href="{% url 'intelligent-search' %}">Get Relevant Jobs</a>
+        <a class="nav-item nav-link {{ profile_page }}" href="{% url 'my-profile' %}">My Profile</a>
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% if user.is_authenticated %}
+            {{ user.username }} <!-- Show username if logged in -->
+            {% else %}
+            My Account
+            {% endif %}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% if user.is_authenticated %}
+            <a class="dropdown-item" href="{% url 'my-profile' %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a class="dropdown-item" href="{% url 'login' %}">Sign In</a>
+            <a class="dropdown-item" href="{% url 'register' %}">Sign Up</a>
+            {% endif %}
+          </div>
+        </div>
+        <a class="nav-item nav-link" href="{% url 'adminlogin' %}">Recruiters</a>
+      </div>
+    </div>
+  </nav>
+  {% else %}
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <a class="navbar-brand" href="{% url 'detail-candidates' %}">
+      <img src="{% static 'logo.png' %}" width="191" height="36" class="d-inline-block align-top mr-3" alt="" />
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
         <a class="nav-item nav-link {{ add_job_page }}" href="{% url 'add-job' %}">Add Job Post</a>
         <a class="nav-item nav-link {{ manage_jobs_page }}" href="{% url 'job-list' %}">Manage Your Job Posts</a>
-        <a class="nav-item nav-link {{ search_candidates_page }}" href="{% url 'search-candidates' %}">Seach
-          Candidates</a>
-        {% if user.is_authenticated %}
-        <a class="nav-item nav-link logout-highlight" href="{% url 'logout' %}">Logout</a>
-        {% else %}
-        
-        <a class="nav-item nav-link login-highlight {{ adminloginPage }}" href="{% url 'adminlogin' %}">Recruiter Login</a>
-        <a class="nav-item nav-link highlight" href="{% url 'home' %}">Job Seekers/Candidates</a>
-        {% endif %}
-        
+        <a class="nav-item nav-link {{ search_candidates_page }}" href="{% url 'search-candidates' %}">Search Candidates</a>
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% if user.is_authenticated %}
+            {{ user.username }} <!-- Show username if logged in -->
+            {% else %}
+            My Account
+            {% endif %}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% if user.is_authenticated %}
+            <a class="dropdown-item" href="{% url 'my-profile' %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a class="dropdown-item" href="{% url 'adminlogin' %}">Recruiter Login</a>
+            {% endif %}
+          </div>
+        </div>
       </div>
     </div>
   </nav>
   {% endif %}
-  {% if not rec_navbar and revdata %}
-  <div class="carousel-container">
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{% static 'banner.jpg' %}" class="d-block w-100" style="max-height: 45vh; width: 100%; object-fit: cover;" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <!-- Your caption content here -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="search-form">
-        <div class="row">
-            <div class="col-12 col-md-10 col-lg-8 mx-auto">
-                <form class="form-signin mt-4" action="{% url 'job-search-list' %}" method="get">
-                    <input name="p" type="text" class="form-control" placeholder="Enter Job Title, Skills, Type or Company" /><br />
-                    <input name="q" type="text" class="form-control" placeholder="Enter Job Location" />
-                    <br />
-                    <div class="form-group">
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">
-                            Search Jobs
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-{% endif %}
 
-
-
-  
+  <!-- Main Content -->
   <div>{% block content %}{% endblock content %}</div>
 
+  <!-- Footer -->
   <footer>
     <hr my-2 />
     <div class="row">
       <div class="col-sm-6 col-md-4 footer-navigation">
-        <h3>Champaran concultancy</h3>
+        <h3>Champaran Consultancy</h3>
         <p class="links">
           <a href="{% url 'detail-candidates' %}">Job Seekers</a><strong> · </strong><a
             href="{% url 'add-job' %}">Recruiters</a><strong> · </strong><a
@@ -230,7 +200,7 @@
           <strong> · </strong><a href="#">Privacy Policy</a>
         </p>
         <p class="company-name">
-          Champaran concultancy @ 2023<br /><small class="text-muted">All rights reserved!</small><br />
+          Champaran Consultancy @ 2023<br /><small class="text-muted">All rights reserved!</small><br />
         </p>
       </div>
       <div class="col-sm-6 col-md-4 footer-contacts">
@@ -238,30 +208,28 @@
           <span class="fa fa-map-marker footer-contacts-icon"></span>
           <p><span class="new-line-span">Motihari</span>BIHAR, India</p>
         </div>
-
         <div>
           <i class="fa fa-envelope footer-contacts-icon"></i>
-          <p><a href="#" target="_blank">utkarshraj432k@gmail.com</a></p>
+          <p><a href="#" target="_blank">consultancychamparan@gmail.com</a></p>
         </div>
       </div>
       <div class="clearfix"></div>
       <div class="col-md-4 footer-about">
         <h4>About the company</h4>
         <p>
-          Champaran concultancy Networks mission is to make hiring easier. We aim to save
+          Champaran Consultancy's mission is to make hiring easier. We aim to save
           time for both job seekers and recruiters and to make the hiring
           process smoother. We continue to innovate and find new solutions to
-          make hiring process simpler.
+          make the hiring process simpler.
         </p>
         <div class="social-links social-icons">
           <a href="#"><i class="fa fa-facebook"></i></a>
           <a href="#"><i class="fa fa-twitter"></i></a>
           <a href="https://www.linkedin.com/company/champaran-consultancy-services/"><i class="fa fa-linkedin"></i></a>
-          <a href="https://www.youtube.com/@NerdByteCoding"><i class="fa fa-youtube"></i></a> <!-- Replace 'your-channel-link' with your actual YouTube channel link -->
-      </div>      
+          <a href="https://www.youtube.com/@NerdByteCoding"><i class="fa fa-youtube"></i></a>
+        </div>
       </div>
     </div>
-
   </footer>
 
   <!-- JS Files -->

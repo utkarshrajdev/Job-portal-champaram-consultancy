@@ -1,58 +1,214 @@
-{% extends "users/layout.html" %} {% load static %} {% block content %}
-<br /><br />
-<div>
-  <h3 class="text-center"><b>Your Job Posts</b></h3>
-  <hr my-2 />
-  {% if not jobs %}
-  <h4 class="text-center">
-    Please <a href="{% url 'add-job' %}">add a job</a> first!
-  </h4>
-  {% else %}
-  <div class="row">
+{% extends "users/layout.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="text-center fw-bold mb-4">Your Job Posts</h2>
+  <div class="row justify-content-center">
+    {% if not jobs %}
+    <div class="col-12 text-center">
+      <div class="card shadow-sm border-0 rounded-lg p-5">
+        <h4 class="mb-3">Please <a href="{% url 'add-job' %}" class="text-primary text-decoration-none hover-link">add a job</a> first!</h4>
+      </div>
+    </div>
+    {% else %}
     {% for job in jobs %}
-    <div class="col-md-6">
-      <div class="card card-signin my-2">
-        <span class="ml-3 mt-3">
-          <a href="{% url 'add-job-detail' job.slug %}"
-            ><h4 class="text-dark">
-              <b>{{job.title}} ({{job.job_type}})</b>
-            </h4></a
-          >
-          <p style="font-size: 17px">{{job.company}}<br />{{job.location}}</p>
-          <p style="font-size: 15px">
-            {{job.description|truncatewords:30}} -
-            <a href="{% url 'add-job-detail' job.slug %}">Read More</a>
-          </p>
-        </span>
-        <div class="card-footer">
-          <span style="font-size: 14px"
-            >Posted on {{job.date_posted|date:"F d, Y"}}</span
-          >
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm border-0 rounded-xl h-100 job-card">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <a href="{% url 'add-job-detail' job.slug %}" class="text-decoration-none">
+              <h4 class="text-dark mb-2 fw-bold job-title">{{job.title}}</h4>
+            </a>
+            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill">{{job.job_type}}</span>
+          </div>
+          
+          <div class="company-info mb-4">
+            <div class="d-flex align-items-center mb-2 company-detail">
+              <div class="icon-wrapper bg-primary-subtle rounded-circle p-2 me-3">
+                <i class="fas fa-building text-primary"></i>
+              </div>
+              <span class="fs-5">{{job.company}}</span>
+            </div>
+            <div class="d-flex align-items-center company-detail">
+              <div class="icon-wrapper bg-primary-subtle rounded-circle p-2 me-3">
+                <i class="fas fa-map-marker-alt text-primary"></i>
+              </div>
+              <span class="fs-5">{{job.location}}</span>
+            </div>
+          </div>
+          
+          <div class="description-wrapper">
+            <p class="text-muted mb-3">
+              {{job.description|truncatewords:15}}
+              <a href="{% url 'add-job-detail' job.slug %}" class="text-primary ms-1 hover-link">Read More</a>
+            </p>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-white border-top p-4">
+          <div class="d-flex align-items-center">
+            <div class="icon-wrapper bg-primary-subtle rounded-circle p-2 me-3">
+              <i class="far fa-calendar-alt text-primary"></i>
+            </div>
+            <span class="text-muted">Posted on {{job.date_posted|date:"F d, Y"}}</span>
+          </div>
         </div>
       </div>
     </div>
     {% endfor %}
   </div>
-</div>
-<br />
-<div class="pagination">
-  <span class="step-links">
-    {% if jobs.has_previous %}
-    <a class="btn btn-info" href="?page=1">&laquo; First</a>
-    <a class="btn btn-danger" href="?page={{ jobs.previous_page_number }}"
-      >Prev</a
-    >
-    {% endif %}
-    <span class="current">
-      Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}.
-    </span>
-    {% if jobs.has_next %}
-    <a class="btn btn-success" href="?page={{ jobs.next_page_number }}">Next</a>
-    <a class="btn btn-primary" href="?page={{ jobs.paginator.num_pages }}"
-      >Last &raquo;</a
-    >
-    {% endif %}
-  </span>
+
+  {% if jobs.paginator.num_pages > 1 %}
+  <nav aria-label="Job listings pagination" class="mt-5">
+    <ul class="pagination justify-content-center">
+      {% if jobs.has_previous %}
+      <li class="page-item">
+        <a class="page-link rounded-start" href="?page=1">
+          <i class="fas fa-angle-double-left"></i> First
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ jobs.previous_page_number }}">
+          <i class="fas fa-angle-left"></i> Previous
+        </a>
+      </li>
+      {% endif %}
+      
+      <li class="page-item active">
+        <span class="page-link">
+          Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}
+        </span>
+      </li>
+      
+      {% if jobs.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ jobs.next_page_number }}">
+          Next <i class="fas fa-angle-right"></i>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link rounded-end" href="?page={{ jobs.paginator.num_pages }}">
+          Last <i class="fas fa-angle-double-right"></i>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
   {% endif %}
 </div>
+
+<style>
+  .job-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+  }
+  
+  .job-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.1);
+  }
+
+  .job-title {
+    color: #1a1a1a;
+    font-size: 1.35rem;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+  }
+
+  .job-title:hover {
+    color: #2563eb;
+  }
+
+  .icon-wrapper {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .company-detail:hover .icon-wrapper {
+    transform: scale(1.1);
+  }
+
+  .badge {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  .bg-primary-subtle {
+    background-color: rgba(37, 99, 235, 0.1);
+  }
+
+  .hover-link {
+    position: relative;
+    text-decoration: none;
+  }
+
+  .hover-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #2563eb;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .hover-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .page-link {
+    color: #2563eb;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin: 0 2px;
+  }
+
+  .page-link:hover {
+    background-color: #e5edff;
+    color: #1e40af;
+  }
+
+  .page-item.active .page-link {
+    background-color: #2563eb;
+    color: white;
+  }
+
+  .description-wrapper {
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .card-body {
+      padding: 1.25rem;
+    }
+    
+    .fs-5 {
+      font-size: 1rem !important;
+    }
+
+    .icon-wrapper {
+      width: 32px;
+      height: 32px;
+    }
+
+    .badge {
+      font-size: 0.8rem;
+    }
+  }
+</style>
 {% endblock content %}

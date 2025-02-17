@@ -31,18 +31,19 @@ def adminloginPage(request):
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
+        
         if user is not None and user.is_staff:
             login(request, user)
+            # Set initial view mode to recruiter
+            request.session['viewing_as_candidate'] = False
             return redirect('detail-recruiters')
         else:
             messages.info(request, 'Username OR password is incorrect')
+    
     context = {
         'rec_login_page': "active",
-        'rec_navbar': 1,
     }
-
-    return render(request, 'recruiters/login_admin.html',context)
-
+    return render(request, 'recruiters/login_admin.html', context)
 
 @login_required
 def add_job(request):

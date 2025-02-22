@@ -1,60 +1,22 @@
 {% extends "users/layout.html" %}
 {% load static %}
 {% block content %}
-{% load embed_video_tags %}
 <link rel="stylesheet" href="{% static 'details.css' %}">
 <style>
-    /* Consistent Font and Body Styling */
+    /* Global Styles */
     body {
         font-family: 'Arial', sans-serif;
         background-color: #f8f9fa;
         color: #343a40;
+        line-height: 1.6;
     }
 
-    /* Card Styling */
-    .card {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .card:hover {
-        transform: translateY(-10px);
-    }
-
-    .card-body {
-        padding: 20px;
-        flex: 1;
-    }
-
-    .card-footer {
-        padding: 10px 20px;
-        background-color: #e9ecef;
-        border-top: 1px solid #ddd;
-    }
-
-    .btn {
-        background-color: #007BFF;
-        color: #fff;
-        border: none;
-        transition: background-color 0.3s;
-    }
-
-    .btn:hover {
-        background-color: #0056b3;
-    }
-
-    /* Section Title Styling */
     .section-title {
-        font-size: 32px;
+        font-size: 36px;
         font-weight: bold;
         margin-bottom: 40px;
         text-align: center;
+        color: #2b6777;
     }
 
     .section-title span {
@@ -70,174 +32,424 @@
         color: #2b6777;
     }
 
-    /* Carousel Styling */
-    .carousel-item {
-        text-align: center;
-        padding: 20px 0;
-    }
-
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
+    .btn {
         background-color: #007BFF;
-        border-radius: 50%;
+        color: #fff;
+        border: none;
+        padding: 12px 24px; /* Larger button size */
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        font-size: 16px;
+        font-weight: 500;
     }
 
-    .carousel-indicators li {
-        background-color: #007BFF;
-    }
-
-    .carousel-indicators .active {
+    .btn:hover {
         background-color: #0056b3;
+        transform: translateY(-2px); /* Slight lift on hover */
     }
 
-    .testimonial-text {
+    .btn-primary {
+        background-color: #007BFF;
+    }
+
+    .btn-secondary {
+        background-color: #2b6777;
+    }
+
+    .btn-secondary:hover {
+        background-color: #1a4a5e;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(135deg, #007BFF, #2b6777);
+        color: #fff;
+        padding: 100px 0;
+        text-align: center;
+    }
+
+    .hero-section h1 {
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .hero-section p {
         font-size: 18px;
-        color: #2b6777;
+        margin-bottom: 30px;
+    }
+
+    .hero-section .search-bar {
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .hero-section .search-bar input {
+        width: 100%;
+        padding: 15px 50px 15px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .hero-section .search-bar button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        padding: 0 20px;
+        border: none;
+        background-color: #0056b3;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+    }
+
+    /* Featured Jobs Section */
+    .featured-jobs {
+        padding: 60px 0;
+        background-color: #fff;
+    }
+
+    .job-card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #fff;
+        margin-bottom: 20px;
+    }
+
+    .job-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .job-card .card-body {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%; /* Ensure card body takes full height */
+    }
+
+    .job-card h5 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .job-card p {
+        font-size: 16px;
+        color: #555;
+    }
+
+    .job-card .badge {
+        background-color: #2b6777;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    /* Top Companies Section */
+    .top-companies {
+        padding: 60px 0;
+        background-color: #f8f9fa;
+    }
+
+    .company-card {
+        text-align: center;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #fff;
+        transition: transform 0.3s ease;
+    }
+
+    .company-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .company-card img {
+        width: 100px;
+        height: 100px;
         margin-bottom: 15px;
     }
 
-    .testimonial-author {
-        font-size: 16px;
-        color: #007BFF;
+    .company-card h5 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
     }
 
-    .testimonial-video-container iframe {
+    .company-card p {
+        font-size: 14px;
+        color: #555;
+    }
+
+    /* Blog Section */
+    .blog-section {
+        padding: 60px 0;
+        background-color: #fff;
+    }
+
+    .blog-card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #fff;
+        margin-bottom: 20px;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .blog-card img {
+        border-radius: 10px 10px 0 0;
         width: 100%;
-        height: 315px;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .blog-card .card-body {
+        padding: 20px;
+    }
+
+    .blog-card h5 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .blog-card p {
+        font-size: 16px;
+        color: #555;
+    }
+
+    /* Ads and Information Section */
+    .ads-section {
+        padding: 60px 0;
+        background-color: #f8f9fa;
+    }
+
+    .ads-card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #fff;
+        margin-bottom: 20px;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .ads-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .ads-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .ads-card h5 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .ads-card p {
+        font-size: 16px;
+        color: #555;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .hero-section h1 {
+            font-size: 36px;
+        }
+
+        .hero-section p {
+            font-size: 16px;
+        }
+
+        .section-title {
+            font-size: 28px;
+        }
+
+        .btn {
+            padding: 10px 20px; /* Slightly smaller buttons on mobile */
+        }
     }
 </style>
 
-<div style="background-color: #c8d8e4">
-
-  <!-- Latest Jobs Section -->
-  <section class="latest-jobs py-5">
+<!-- Hero Section -->
+<section class="hero-section">
     <div class="container">
-      <div class="text-center">
-        <h1 class="section-title">
-          <span class="secondary">Latest</span>
-          <span class="primary">Jobs</span>
-        </h1>
-      </div>
-      <div class="row">
-        {% for n in object_list %}
-            <div class="col-md-4 mb-4">
-                <div class="card">
+        <h1>Find Your Dream Job</h1>
+        <p>Discover thousands of job opportunities and take the next step in your career.</p>
+        <div class="search-bar">
+            <form action="{% url 'job-search-list' %}" method="GET">
+                <input type="text" name="p" placeholder="Search for jobs..." required>
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Jobs Section -->
+<section class="featured-jobs">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="secondary">Featured</span>
+            <span class="primary">Jobs</span>
+        </h2>
+        <div class="row">
+            {% for n in object_list %}
+            <!-- Static Data for Featured Jobs -->
+            <div class="col-md-4">
+                <div class="job-card">
                     <div class="card-body">
-                        <a href="{% url 'job-detail' n.slug %}" class="text-dark">
-                            <h4><b>{{ n.title }} ({{ n.job_type }})</b></h4>
-                        </a>
-                        <p class="card-text text-primary">{{ n.company }} - {{ n.location }}</p>
-                        <p class="card-text">{{ n.description|truncatewords:10 }}</p>
-                        <a href="/job/{{ n.slug }}" class="btn">Read More</a>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted">Posted on {{n.date_posted|date:"F d, Y"}}</small>
-                        <div>
-                            <i class="fas fa-share-alt text-info"></i>
-                        </div>
+                        <h5>{{ n.title }}</h5>
+                        <p>{{ n.company|truncatewords:2 }} - {{ n.location|truncatewords:1 }}</p>
+                        <span class="badge">Full-Time</span>
+                        <a href="/job/{{ n.slug }}" class="btn btn-primary mt-3">Apply Now</a>
                     </div>
                 </div>
             </div>
-        {% endfor %}
-      </div>
-      <div class="text-center mt-4">
-        <a href="{% url 'job-search-list' %}" class="btn btn-primary btn-lg">More Jobs</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Leetcode Top Interview 150 Section -->
-  <section class="testimonial py-5">
-    <div class="container">
-      <div class="text-center">
-        <h1 class="section-title">
-          <span class="secondary">Leetcode Top</span>
-          <span class="primary">Interview 150</span>
-        </h1>
-      </div>
-      <div id="videoCarousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          {% for n in revdata %}
-          <li data-target="#videoCarousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
-          {% endfor %}
-        </ol>
-        <div class="carousel-inner">
-          {% for n in revdata %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <div class="row">
-              <div class="col-md-7">
-                <div class="testimonial-video-container">
-                  <iframe width="100%" height="315" src="{{ n.video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-              </div>
-              <div class="col-md-5">
-                <div class="testimonial-text-container">
-                  <p class="testimonial-text">{{ n.review|truncatewords:50 }}</p>
-                  <p class="testimonial-author">- {{ n.full_name }}, {{ n.profession }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
+            
+            {% endfor %}
         </div>
-        <a class="carousel-control-prev" href="#videoCarousel" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#videoCarousel" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-      <div class="text-center mt-4">
-        <a href="https://www.youtube.com/playlist?list=PLipROcllwzXgahMxqJIbG254OQQ8lK-tG" class="btn btn-primary btn-lg">More Videos</a>
-      </div>
     </div>
-  </section>
+</section>
 
-  <!-- Testimonial Section -->
-  <section class="testimonial py-5">
+<!-- Top Companies Section -->
+<section class="top-companies">
     <div class="container">
-      <div class="text-center">
-        <h1 class="section-title">
-          <span class="secondary">Testimonial</span>
-        </h1>
-      </div>
-      <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          {% for n in revdata %}
-          <li data-target="#testimonialCarousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
-          {% endfor %}
-        </ol>
-        <div class="carousel-inner">
-          {% for n in revdata %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <div class="row align-items-center">
-              <div class="col-md-2 d-none d-md-block">
-                <div class="testimonial-video-container">
-                  <i class="fas fa-user-circle fa-5x"></i>
+        <h2 class="section-title">
+            <span class="secondary">Top</span>
+            <span class="primary">Companies</span>
+        </h2>
+        <div class="row">
+            <!-- Static Data for Top Companies -->
+            <div class="col-md-3">
+                <div class="company-card">
+                    <!-- <img src="https://source.unsplash.com/random/100x100" alt="Tech Corp"> -->
+                    <h5>TCS</h5>
+                    <p>15 Open Positions</p>
                 </div>
-              </div>
-              <div class="col-md-10">
-                <div class="testimonial-text-container">
-                  <p class="testimonial-text">{{ n.review|truncatewords:25 }}</p>
-                  <p class="testimonial-author">- {{ n.full_name }}, {{ n.profession }}</p>
-                </div>
-              </div>
             </div>
-          </div>
-          {% endfor %}
+            <div class="col-md-3">
+                <div class="company-card">
+                    <!-- <img src="https://via.placeholder.com/100" alt="Innovate Inc"> -->
+                    <h5>PwC</h5>
+                    <p>10 Open Positions</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="company-card">
+                    <!-- <img src="https://via.placeholder.com/100" alt="DataWorks"> -->
+                    <h5>Airtel</h5>
+                    <p>8 Open Positions</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="company-card">
+                    <!-- <img src="https://via.placeholder.com/100" alt="Cloudify"> -->
+                    <h5>Oracle</h5>
+                    <p>12 Open Positions</p>
+                </div>
+            </div>
         </div>
-        <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
     </div>
-  </section>
-</div>
+</section>
+
+<!-- Blog Section -->
+<section class="blog-section">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="secondary">Career</span>
+            <span class="primary">Advice</span>
+        </h2>
+        <div class="row">
+            <!-- Static Data for Career Advice Blogs -->
+            <div class="col-md-4">
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=400&h=200&fit=crop" alt="Resume Tips">
+                    <div class="card-body">
+                        <h5>Top 10 Resume Tips</h5>
+                        <p>Learn how to create a resume that stands out to recruiters.</p>
+                        <a href="https://www.indeed.com/career-advice/resumes-cover-letters/10-resume-writing-tips?utm_source=chatgpt.com" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=200&fit=crop" alt="Interview Prep">
+                    <div class="card-body">
+                        <h5>Ace Your Interview</h5>
+                        <p>Prepare for your next job interview with these expert tips.</p>
+                        <a href="https://www.indeed.com/career-advice/interviewing/how-to-ace-your-next-interview?utm_source=chatgpt.com" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=200&fit=crop" alt="Remote Work">
+                    <div class="card-body">
+                        <h5>Mastering Remote Work</h5>
+                        <p>Tips for staying productive and balanced while working remotely.</p>
+                        <a href="https://www.pcmag.com/explainers/get-organized-20-tips-for-working-from-home?utm_source=chatgpt.com" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Ads and Information Section -->
+<section class="ads-section">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="secondary">Ads &</span>
+            <span class="primary">Information</span>
+        </h2>
+        <div class="row">
+            <!-- Static Data for Ads -->
+            <div class="col-md-4">
+                <div class="ads-card">
+                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=200&fit=crop" alt="Ad 1">
+                    <h5>Boost Your Career</h5>
+                    <p>Learn new skills with our online courses and certifications.</p>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="ads-card">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=200&fit=crop" alt="Ad 2">
+                    <h5>Hiring Now</h5>
+                    <p>Join our team and work on exciting projects worldwide.</p>
+                    <a href="#" class="btn btn-secondary">Apply Now</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="ads-card">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=200&fit=crop" alt="Ad 3">
+                    <h5>Upcoming Events</h5>
+                    <p>Attend our career fairs and networking events.</p>
+                    <a href="#" class="btn btn-secondary">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock content %}

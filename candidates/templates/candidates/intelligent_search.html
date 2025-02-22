@@ -1,39 +1,312 @@
-{%extends "users/layout.html" %} {% load static %} {% block content %}
-<br /><br />
-<div>
-  <h3 class="text-center"><b>Most Relevant Jobs for You </b></h3><br>
-  {%if counter %}
-  <div class="row">
-    {% for job,common, job_skill in jobs %}
-    <div class="col-md-6">
-      <div class="card card-signin my-2">
-        <span class="ml-3 mt-3">
-          <a href="{% url 'job-detail' job.slug %}">
-            <h4 class="text-dark">
-              <b>{{job.title}} ({{job.job_type}})</b>
-            </h4>
-          </a>
-          <p class="text-secondary">
-            {{job.company}}<br />{{job.location}}
-          </p>
-          <p class="text-dark">
-            {{job.description|truncatewords_html:8|safe}}
-          </p>
-          <a href="{% url 'job-detail' job.slug %}" class="btn btn-primary">Read More</a>
-        </span>
-        <div class="card-footer">
-          <span style="font-size: 18px">You have <b class="text-success">{{ common }} </b>out of <b
-              class="text-danger">{{ job_skill }}</b> skills required for this job.</span>
+{% extends "users/layout.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Custom Styles for Relevant Jobs Page */
+    .card-signin {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-signin:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-signin .card-body {
+        padding: 20px;
+    }
+
+    .card-signin h4 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 10px;
+    }
+
+    .card-signin h4 a {
+        color: #343a40;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .card-signin h4 a:hover {
+        color: #007bff;
+    }
+
+    .card-signin .text-secondary {
+        font-size: 16px;
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+
+    .card-signin .text-dark {
+        font-size: 16px;
+        color: #343a40;
+        margin-bottom: 15px;
+    }
+
+    .card-signin .btn-primary {
+        background-color: #007bff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .card-signin .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .card-signin .card-footer {
+        background-color: #f8f9fa;
+        border-top: 1px solid #ddd;
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+
+    .card-signin .card-footer b {
+        font-weight: bold;
+    }
+
+    .card-signin .card-footer .text-success {
+        color: #28a745;
+    }
+
+    .card-signin .card-footer .text-danger {
+        color: #dc3545;
+    }
+
+    .no-jobs {
+        text-align: center;
+        font-size: 18px;
+        color: #6c757d;
+        margin-top: 20px;
+    }
+
+    .no-jobs a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .no-jobs a:hover {
+        color: #0056b3;
+    }
+
+    .section-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .category-card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .category-card i {
+        font-size: 40px;
+        color: #007bff;
+        margin-bottom: 15px;
+    }
+
+    .category-card h5 {
+        font-size: 20px;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 10px;
+    }
+
+    .category-card p {
+        font-size: 16px;
+        color: #6c757d;
+    }
+
+    .company-card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .company-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .company-card img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 15px;
+    }
+
+    .company-card h5 {
+        font-size: 20px;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 10px;
+    }
+
+    .company-card p {
+        font-size: 16px;
+        color: #6c757d;
+    }
+
+    .cta-section {
+        background-color: #007bff;
+        color: #fff;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .cta-section h2 {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .cta-section p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .cta-section .btn {
+        background-color: #fff;
+        color: #007bff;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .cta-section .btn:hover {
+        background-color: #f8f9fa;
+        color: #007bff;
+    }
+</style>
+
+<div class="container">
+    <br /><br />
+    <h3 class="text-center"><b>Most Relevant Jobs for You</b></h3>
+    <br />
+    {% if counter %}
+    <div class="row">
+        {% for job, common, job_skill in jobs %}
+        <div class="col-md-6">
+            <div class="card card-signin my-2">
+                <div class="card-body">
+                    <a href="{% url 'job-detail' job.slug %}">
+                        <h4><b>{{ job.title }} ({{ job.job_type }})</b></h4>
+                    </a>
+                    <p class="text-secondary">
+                        {{ job.company }}<br />{{ job.location }}
+                    </p>
+                    <p class="text-dark">
+                        {{ job.description|truncatewords_html:8|safe }}
+                    </p>
+                    <a href="{% url 'job-detail' job.slug %}" class="btn btn-primary">Read More</a>
+                </div>
+                <div class="card-footer">
+                    <span style="font-size: 16px">
+                        You have <b class="text-success">{{ common }}</b> out of <b class="text-danger">{{ job_skill }}</b> skills required for this job.
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-</div>
-<br />
-{% else %}
-<p class="text-center">No relevant jobs for you now! Please check if your <a href="{% url 'my-profile' %}">profile</a>
-  is complete.</p><br>
-{% endif %}
+    {% else %}
+    <!-- No Jobs Section -->
+    <p class="no-jobs">
+        No relevant jobs for you now! Please check if your <a href="{% url 'my-profile' %}">profile</a> is complete.
+    </p>
+    <br />
+
+    <!-- Popular Job Categories Section -->
+    <div class="row">
+        <div class="col-12">
+            <h3 class="section-title">Explore Popular Job Categories</h3>
+        </div>
+        <div class="col-md-4">
+            <div class="category-card">
+                <i class="fas fa-laptop-code"></i>
+                <h5>Software Development</h5>
+                <p>Explore jobs in software engineering, web development, and more.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="category-card">
+                <i class="fas fa-chart-line"></i>
+                <h5>Data Science</h5>
+                <p>Find roles in data analysis, machine learning, and AI.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="category-card">
+                <i class="fas fa-briefcase"></i>
+                <h5>Product Management</h5>
+                <p>Discover opportunities in product strategy and management.</p>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <!-- Featured Companies Section -->
+    <div class="row">
+        <div class="col-12">
+            <h3 class="section-title">Featured Companies</h3>
+        </div>
+        <div class="col-md-4">
+            <div class="company-card">
+                <img src="https://via.placeholder.com/100" alt="Tech Corp">
+                <h5>Tech Corp</h5>
+                <p>15 Open Positions</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="company-card">
+                <img src="https://via.placeholder.com/100" alt="Innovate Inc">
+                <h5>Innovate Inc</h5>
+                <p>10 Open Positions</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="company-card">
+                <img src="https://via.placeholder.com/100" alt="DataWorks">
+                <h5>DataWorks</h5>
+                <p>8 Open Positions</p>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <!-- Call-to-Action Section -->
+    <div class="cta-section">
+        <h2>Looking for More Opportunities?</h2>
+        <p>Complete your profile to get personalized job recommendations.</p>
+        <a href="{% url 'my-profile' %}" class="btn">Complete Your Profile</a>
+    </div>
+    {% endif %}
 </div>
 {% endblock content %}

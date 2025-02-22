@@ -1,101 +1,288 @@
-{% extends "users/layout.html" %} {% load static %}
+{% extends "users/layout.html" %}
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'details.css' %}">
+<style>
+    /* Global Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        color: #343a40;
+        line-height: 1.6;
+    }
 
-<div>
-  <form class="form-signin mt-4" action="{% url 'job-search-list' %}" method="get">
-    <div class="row">
-      <div class="col-md-6">
-        <input name="p" type="text" class="form-control" placeholder="Enter Job Title, Skills, Type or Company" /><br />
-      </div>
-      <div class="col-md-6">
-        <input name="q" type="text" class="form-control" placeholder="Enter Job Location" /><br />
-      </div>
-    </div>
-    <div class="form-group">
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Search Jobs
-      </button>
-    </div>
-  </form>
-  <hr my-2 />
-  {%if jobs %}
-  <div class="row">
-    {% for job in jobs %}
-    <div class="col-md-6">
-      <div class="card card-signin my-2">
-        <span class="ml-3 mt-3">
-          <a href="{% url 'job-detail' job.slug %}">
-            <h4 class="text-dark">
-              <b>{{job.title}} ({{job.job_type}})</b>
-            </h4>
-          </a>
-          <p style="font-size: 17px">
-            {{job.company}}<br />{{job.location}}
-          </p>
-          <p class="text-dark">
-            {{job.description|truncatewords_html:8|safe}}
-          </p>
-          <a href="{% url 'job-detail' job.slug %}" class="btn btn-primary">Read More</a>
-        </span>
-        <div class="card-footer">
-          <span class="text-secondary">Posted on {{job.date_posted|date:"F d, Y"}}</span>
+    .section-title {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 40px;
+        text-align: center;
+        color: #2b6777;
+    }
+
+    .section-title span {
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+    .section-title .primary {
+        color: #007BFF;
+    }
+
+    .section-title .secondary {
+        color: #2b6777;
+    }
+
+    .btn {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    .btn-outline {
+        background-color: transparent;
+        border: 2px solid #007BFF;
+        color: #007BFF;
+    }
+
+    .btn-outline:hover {
+        background-color: #007BFF;
+        color: #fff;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(135deg, #007BFF, #2b6777);
+        color: #fff;
+        padding: 100px 0;
+        text-align: center;
+    }
+
+    .hero-section h1 {
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .hero-section p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .hero-section .search-bar {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .hero-section .search-bar input {
+        width: 100%;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .hero-section .search-bar button {
+        width: 100%;
+        padding: 12px 20px;
+        border: none;
+        background-color: #0056b3;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    /* Job Listings */
+    .job-listings {
+        padding: 60px 0;
+    }
+
+    .job-card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #fff;
+        margin-bottom: 20px;
+        height: 100%;
+        padding: 20px;
+    }
+
+    .job-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .job-card h5 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #2b6777;
+    }
+
+    .job-card p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 15px;
+    }
+
+    .job-card .badge {
+        background-color: #2b6777;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    .job-card .btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .pagination .btn {
+        margin: 0 5px;
+    }
+
+    /* No Jobs Found Section */
+    .no-jobs-found {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .no-jobs-found h5 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #2b6777;
+    }
+
+    .no-jobs-found .btn-outline {
+        margin: 5px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .hero-section h1 {
+            font-size: 36px;
+        }
+
+        .hero-section p {
+            font-size: 16px;
+        }
+
+        .section-title {
+            font-size: 28px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+        }
+
+        .job-card {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <h1>Find Your Dream Job</h1>
+        <p>Search thousands of job opportunities and take the next step in your career.</p>
+        <div class="search-bar">
+            <form action="{% url 'job-search-list' %}" method="get">
+                <input name="p" type="text" class="form-control" placeholder="Enter Job Title, Skills, Type or Company" />
+                <input name="q" type="text" class="form-control mt-3" placeholder="Enter Job Location" />
+                <button type="submit" class="btn btn-primary btn-block mt-3">Search Jobs</button>
+            </form>
         </div>
-      </div>
     </div>
-    {% endfor %}
-</div>
+</section>
 
-</div>
-<br />
-<div class="pagination">
-  <span class="step-links">
-    {% if jobs.has_previous %}
-    <a class="btn btn-info"
-      href="?page=1{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;
-      First</a>
-    <a class="btn btn-danger"
-      href="?page={{ jobs.previous_page_number }}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Prev</a>
-    {% endif %}
-    <span class="current">
-      Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}.
-    </span>
-    {% if jobs.has_next %}
-    <a class="btn btn-success"
-      href="?page={{ jobs.next_page_number }}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a>
-    <a class="btn btn-primary"
-      href="?page={{ jobs.paginator.num_pages }}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Last
-      &raquo;</a>
-    {% endif %}
-  </span>
-</div>
+<!-- Job Listings -->
+<div class="job-listings">
+    <div class="container">
+        {% if jobs %}
+        <div class="row">
+            {% for job in jobs %}
+            <div class="col-md-6">
+                <div class="job-card">
+                    <h5>{{ job.title }} ({{ job.job_type }})</h5>
+                    <p>{{ job.company }}<br>{{ job.location }}</p>
+                    <p>{{ job.description|truncatewords_html:8|safe }}</p>
+                    <span class="badge">Posted on {{ job.date_posted|date:"F d, Y" }}</span>
+                    <a href="{% url 'job-detail' job.slug %}" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
 
-{% else %}
-<div class="row" >
-  <div class="col-sm-12 col-md-12 col-lg-12 mx-auto" >
-    <div class="card card-signin my-5" style="background-color: #f2f2f2;">
-      <div class="card-body">
-        <h5 class="card-title text-center">
-          <b>No relevant jobs found for this search term!</b><br />
-        </h5>
-        <hr my-2 />
-        <h5 class="card-title text-center"><b>Search instead for:</b><br /></h5>
-        <form class="form-signin">
-          <div class="form-group">
-            <a class="btn btn-outline-primary mr-2 mt-2" href="/job/?p=software&q=">Software</a>
-            <a class="btn btn-outline-info mr-2 mt-2" href="/job/?p=internship&q=">Internship</a>
-            <a class="btn btn-outline-danger mr-2 mt-2" href="/job/?p=product+manager&q=">Product Manager</a>
-            <a class="btn btn-outline-secondary mr-2 mt-2" href="/job/?p=python&q=">Python</a>
-            <a class="btn btn-outline-dark mr-2 mt-2" href="/job/?p=web&q=">Web</a>
-            <a class="btn btn-outline-danger mr-2 mt-2" href="/job/?p=android&q=">Android</a>
-            <a class="btn btn-outline-success mr-2 mt-2" href="/job/?p=analyst&q=">Analyst</a>
-            <a class="btn btn-outline-info mr-2 mt-2" href="/job/?p=sales&q=">Sales</a>
-          </div>
-        </form>
-      </div>
+        <!-- Pagination -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if jobs.has_previous %}
+                <a class="btn btn-info"
+                    href="?page=1{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;
+                    First</a>
+                <a class="btn btn-danger"
+                    href="?page={{ jobs.previous_page_number }}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Prev</a>
+                {% endif %}
+                <span class="current">
+                    Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}.
+                </span>
+                {% if jobs.has_next %}
+                <a class="btn btn-success"
+                    href="?page={{ jobs.next_page_number }}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a>
+                <a class="btn btn-primary"
+                    href="?page={{ jobs.paginator.num_pages }}{% if request.GET.p %}&p={{ request.GET.p }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Last
+                    &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        {% else %}
+        <!-- No Jobs Found Section -->
+        <div class="no-jobs-found">
+            <h5>No relevant jobs found for this search term!</h5>
+            <hr>
+            <h5>Search instead for:</h5>
+            <div class="mt-3">
+                <a class="btn btn-outline-primary" href="/job/?p=software&q=">Software</a>
+                <a class="btn btn-outline-info" href="/job/?p=internship&q=">Internship</a>
+                <a class="btn btn-outline-danger" href="/job/?p=product+manager&q=">Product Manager</a>
+                <a class="btn btn-outline-secondary" href="/job/?p=python&q=">Python</a>
+                <a class="btn btn-outline-dark" href="/job/?p=web&q=">Web</a>
+                <a class="btn btn-outline-danger" href="/job/?p=android&q=">Android</a>
+                <a class="btn btn-outline-success" href="/job/?p=analyst&q=">Analyst</a>
+                <a class="btn btn-outline-info" href="/job/?p=sales&q=">Sales</a>
+            </div>
+        </div>
+        {% endif %}
     </div>
-  </div>
-</div>
 </div>
 
-{% endif %}
 {% endblock content %}

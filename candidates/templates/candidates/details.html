@@ -314,37 +314,20 @@
             <span class="primary">Jobs</span>
         </h2>
         <div class="row">
+            {% for n in object_list %}
             <!-- Static Data for Featured Jobs -->
             <div class="col-md-4">
                 <div class="job-card">
                     <div class="card-body">
-                        <h5>Software Engineer</h5>
-                        <p>Tech Corp - San Francisco, CA</p>
+                        <h5>{{ n.title }}</h5>
+                        <p>{{ n.company|truncatewords:2 }} - {{ n.location|truncatewords:1 }}</p>
                         <span class="badge">Full-Time</span>
-                        <a href="#" class="btn btn-primary mt-3">Apply Now</a>
+                        <a href="/job/{{ n.slug }}" class="btn btn-primary mt-3">Apply Now</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="job-card">
-                    <div class="card-body">
-                        <h5>Product Manager</h5>
-                        <p>Innovate Inc - New York, NY</p>
-                        <span class="badge">Remote</span>
-                        <a href="#" class="btn btn-primary mt-3">Apply Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="job-card">
-                    <div class="card-body">
-                        <h5>Data Scientist</h5>
-                        <p>DataWorks - Chicago, IL</p>
-                        <span class="badge">Contract</span>
-                        <a href="#" class="btn btn-primary mt-3">Apply Now</a>
-                    </div>
-                </div>
-            </div>
+            
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -360,29 +343,29 @@
             <!-- Static Data for Top Companies -->
             <div class="col-md-3">
                 <div class="company-card">
-                    <img src="https://via.placeholder.com/100" alt="Tech Corp">
-                    <h5>Tech Corp</h5>
+                    <!-- <img src="https://source.unsplash.com/random/100x100" alt="Tech Corp"> -->
+                    <h5>TCS</h5>
                     <p>15 Open Positions</p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="company-card">
-                    <img src="https://via.placeholder.com/100" alt="Innovate Inc">
-                    <h5>Innovate Inc</h5>
+                    <!-- <img src="https://via.placeholder.com/100" alt="Innovate Inc"> -->
+                    <h5>PwC</h5>
                     <p>10 Open Positions</p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="company-card">
-                    <img src="https://via.placeholder.com/100" alt="DataWorks">
-                    <h5>DataWorks</h5>
+                    <!-- <img src="https://via.placeholder.com/100" alt="DataWorks"> -->
+                    <h5>Airtel</h5>
                     <p>8 Open Positions</p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="company-card">
-                    <img src="https://via.placeholder.com/100" alt="Cloudify">
-                    <h5>Cloudify</h5>
+                    <!-- <img src="https://via.placeholder.com/100" alt="Cloudify"> -->
+                    <h5>Oracle</h5>
                     <p>12 Open Positions</p>
                 </div>
             </div>
@@ -401,31 +384,31 @@
             <!-- Static Data for Career Advice Blogs -->
             <div class="col-md-4">
                 <div class="blog-card">
-                    <img src="https://via.placeholder.com/400x200" alt="Resume Tips">
+                    <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=400&h=200&fit=crop" alt="Resume Tips">
                     <div class="card-body">
                         <h5>Top 10 Resume Tips</h5>
                         <p>Learn how to create a resume that stands out to recruiters.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <a href="https://www.indeed.com/career-advice/resumes-cover-letters/10-resume-writing-tips?utm_source=chatgpt.com" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="blog-card">
-                    <img src="https://via.placeholder.com/400x200" alt="Interview Prep">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=200&fit=crop" alt="Interview Prep">
                     <div class="card-body">
                         <h5>Ace Your Interview</h5>
                         <p>Prepare for your next job interview with these expert tips.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <a href="https://www.indeed.com/career-advice/interviewing/how-to-ace-your-next-interview?utm_source=chatgpt.com" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="blog-card">
-                    <img src="https://via.placeholder.com/400x200" alt="Remote Work">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=200&fit=crop" alt="Remote Work">
                     <div class="card-body">
                         <h5>Mastering Remote Work</h5>
                         <p>Tips for staying productive and balanced while working remotely.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <a href="https://www.pcmag.com/explainers/get-organized-20-tips-for-working-from-home?utm_source=chatgpt.com" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
             </div>
@@ -444,7 +427,7 @@
             <!-- Static Data for Ads -->
             <div class="col-md-4">
                 <div class="ads-card">
-                    <img src="https://via.placeholder.com/400x150" alt="Ad 1">
+                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=200&fit=crop" alt="Ad 1">
                     <h5>Boost Your Career</h5>
                     <p>Learn new skills with our online courses and certifications.</p>
                     <a href="#" class="btn btn-secondary">Learn More</a>
@@ -452,7 +435,7 @@
             </div>
             <div class="col-md-4">
                 <div class="ads-card">
-                    <img src="https://via.placeholder.com/400x150" alt="Ad 2">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=200&fit=crop" alt="Ad 2">
                     <h5>Hiring Now</h5>
                     <p>Join our team and work on exciting projects worldwide.</p>
                     <a href="#" class="btn btn-secondary">Apply Now</a>
@@ -460,7 +443,7 @@
             </div>
             <div class="col-md-4">
                 <div class="ads-card">
-                    <img src="https://via.placeholder.com/400x150" alt="Ad 3">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=200&fit=crop" alt="Ad 3">
                     <h5>Upcoming Events</h5>
                     <p>Attend our career fairs and networking events.</p>
                     <a href="#" class="btn btn-secondary">Register</a>

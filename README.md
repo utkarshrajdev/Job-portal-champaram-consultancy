@@ -4,6 +4,8 @@ Welcome to our Job Portal! This project provides a platform for both businesses 
 
 ## Setup
 
+0. Python 3.13.2
+
 1. Clone this repository:
 
     ```

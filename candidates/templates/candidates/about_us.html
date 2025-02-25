@@ -1,0 +1,342 @@
+{% extends "users/layout.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'details.css' %}">
+<style>
+    /* About Us Page Styles */
+    .about-section {
+        padding: 60px 0;
+        background-color: #fff;
+    }
+
+    .about-section h2 {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 40px;
+        text-align: center;
+        color: #2b6777;
+    }
+
+    .about-section h2 span {
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+    .about-section h2 .primary {
+        color: #007BFF;
+    }
+
+    .about-section h2 .secondary {
+        color: #2b6777;
+    }
+
+    .about-section p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+    .about-section ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .about-section ul li {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 10px;
+        padding-left: 30px;
+        position: relative;
+    }
+
+    .about-section ul li::before {
+        content: "•";
+        color: #007BFF;
+        font-size: 20px;
+        position: absolute;
+        left: 0;
+        top: -2px;
+    }
+
+    .about-section .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #fff;
+        margin-bottom: 20px;
+    }
+
+    .about-section .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .about-section .card-body {
+        padding: 20px;
+    }
+
+    .about-section .card-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #2b6777;
+    }
+
+    .about-section .card-text {
+        font-size: 16px;
+        color: #555;
+    }
+
+    .about-section .contact-info {
+        background: linear-gradient(135deg, #007BFF, #2b6777);
+        padding: 40px 20px;
+        border-radius: 10px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .about-section .contact-info h4 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .about-section .contact-info p {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .about-section .contact-info a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .about-section .contact-info a:hover {
+        text-decoration: underline;
+    }
+
+    .about-section .icon {
+        font-size: 40px;
+        color: #007BFF;
+        margin-bottom: 15px;
+    }
+
+    .about-section .testimonial-card {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .about-section .testimonial-card img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+    }
+
+    .about-section .testimonial-card h5 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .about-section .testimonial-card p {
+        font-size: 14px;
+        color: #555;
+    }
+
+    .about-section .animated-heading {
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+</style>
+
+<!-- About Us Section -->
+<section class="about-section">
+    <div class="container">
+        <h2 class="section-title animated-heading">
+            <span class="secondary">About</span>
+            <span class="primary">Us</span>
+        </h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>Champaran Consultancy Services (CCS)</h3>
+                        <p>
+                            Champaran Consultancy Services (CCS) is committed to providing free job consultancy services across India. Our mission is to assist unemployed individuals in finding private sector jobs with salaries ranging from ₹8,000 to ₹15,000 per month, based on their qualifications, without charging any fees.
+                        </p>
+                        <p>
+                            Additionally, we collaborate with industries and business owners to fulfill their hiring needs by connecting them with skilled or fresher candidates.
+                        </p>
+                        <p>
+                            Currently, CCS is available on Facebook, and soon, our website will be live to ensure seamless job assistance and hiring solutions.
+                        </p>
+                        <p>
+                            <strong>Udyam Registration Number:</strong> BR-11-0000760
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Services Section -->
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h4 class="card-title">Our Services</h4>
+                        <h5>For Job Seekers</h5>
+                        <ul>
+                            <li>Free Job Search Assistance – Helping candidates find suitable jobs as per their skills and qualifications.</li>
+                            <li>Career Counseling – Providing guidance on career growth and skill development.</li>
+                            <li>Networking Opportunities – Connecting job seekers with potential employers.</li>
+                            <li>Skill Development – Training in relevant skills to enhance employability.</li>
+                            <li>Placement Services – Assisting in securing job opportunities in various sectors.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h4 class="card-title">For Employers</h4>
+                        <ul>
+                            <li>Staffing & Recruiting Services – Providing skilled and fresher candidates as per business requirements.</li>
+                            <li>Industry-Specific Hiring Solutions – Hiring for IT, Non-IT, Banking & Finance, Schools, Universities, Engineering & Manufacturing, Retail, Telecom, Insurance, Research, FMCG, Healthcare, and other industries.</li>
+                            <li>Bulk Hiring & Custom Staffing Solutions – Assisting businesses in fulfilling large-scale hiring needs.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Industries We Cater To -->
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h4 class="card-title">Industries We Cater To</h4>
+                        <p>
+                            We provide job opportunities and recruitment solutions across multiple sectors, including:
+                        </p>
+                        <ul>
+                            <li>IT & Software Development</li>
+                            <li>Banking & Finance</li>
+                            <li>Education (Schools & Universities)</li>
+                            <li>Engineering & Manufacturing</li>
+                            <li>Retail & Telecom</li>
+                            <li>Insurance & Research</li>
+                            <li>Fast-Moving Consumer Goods (FMCG)</li>
+                            <li>Healthcare & Medical Services</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Career Counseling & Training -->
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4 class="card-title">Career Counseling & Training</h4>
+                        <h5>Training & Skill Development</h5>
+                        <p>
+                            We offer training in various technical and professional skills to help candidates enhance their employability, including:
+                        </p>
+                        <ul>
+                            <li>Linux, UNIX, SQL, PLSQL</li>
+                            <li>Shell Scripting, JIRA, ServiceNow</li>
+                            <li>Perl, Python, and More</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <h2 class="section-title">
+                    <span class="secondary">What Our</span>
+                    <span class="primary">Clients Say</span>
+                </h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="testimonial-card">
+                            <!-- <img src="https://via.placeholder.com/80" alt="Client 1"> -->
+                            <h5>John Doe</h5>
+                            <p>"CCS helped me find a job within a month. Their support and guidance were exceptional!"</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="testimonial-card">
+                            <!-- <img src="https://via.placeholder.com/80" alt="Client 2"> -->
+                            <h5>Jane Smith</h5>
+                            <p>"The training programs are excellent. I highly recommend CCS to job seekers."</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="testimonial-card">
+                            <!-- <img src="https://via.placeholder.com/80" alt="Client 3"> -->
+                            <h5>Rajesh Kumar</h5>
+                            <p>"Great service! They connected us with skilled candidates quickly."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Us Section -->
+        <!-- <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="contact-info">
+                    <h4>Contact Us</h4>
+                    <p>
+                        If you're a job seeker looking for opportunities or an employer needing skilled candidates, connect with us today!
+                    </p>
+                    <p>
+                        📞 <strong>Contact Numbers:</strong><br>
+                        Gaurav Dubey: <a href="tel:+918986587089">+91 8986587089</a>, <a href="tel:+919523619389">+91 9523619389</a>
+                    </p>
+                    <p>
+                        📧 <strong>Email:</strong> <a href="mailto:consultancychamparan@gmail.com">consultancychamparan@gmail.com</a>
+                    </p>
+                    <p>
+                        📍 <strong>Address:</strong> Champaran Consultancy Services, East Champaran, Bihar – 845401
+                    </p>
+                    <p>
+                        Follow us on <a href="https://www.facebook.com/your-facebook-page" target="_blank">Facebook</a> for updates!
+                    </p>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</section>
+{% endblock content %}

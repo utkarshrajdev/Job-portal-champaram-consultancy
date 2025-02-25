@@ -290,13 +290,101 @@
             padding: 10px 20px; /* Slightly smaller buttons on mobile */
         }
     }
+    /* Free Services Section */
+    .free-services {
+        background-color: #fff;
+    }
+
+    .service-card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #fff;
+        margin-bottom: 20px;
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .service-card i {
+        color: #007BFF;
+    }
+
+    /* Job Providers Section */
+    .job-providers {
+        background-color: #f8f9fa;
+    }
+
+    .job-providers ul {
+        padding-left: 0;
+    }
+
+    .job-providers ul li {
+        font-size: 16px;
+        color: #555;
+    }
+
+    .job-providers img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Hero Section (Call-to-Action) */
+    .hero-section {
+        background: linear-gradient(135deg, #007BFF, #2b6777);
+        color: #fff;
+        padding: 100px 0;
+        text-align: center;
+    }
+
+    .hero-section h1 {
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .hero-section p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .hero-section .btn {
+        font-size: 18px;
+        padding: 12px 24px;
+    }
+    .dropdown-menu {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .dropdown-item {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #343a40;
+        transition: background-color 0.3s ease;
+    }
+
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+        color: #007BFF;
+    }
+
+    .dropdown-item i {
+        width: 20px;
+        text-align: center;
+    }
 </style>
 
 <!-- Hero Section -->
 <section class="hero-section">
     <div class="container">
-        <h1>Find Your Dream Job</h1>
-        <p>Discover thousands of job opportunities and take the next step in your career.</p>
+        <h1>Find Your Dream Job for Free!</h1>
+        <p>Connecting job seekers and providers at zero cost.</p>
         <div class="search-bar">
             <form action="{% url 'job-search-list' %}" method="GET">
                 <input type="text" name="p" placeholder="Search for jobs..." required>
@@ -305,6 +393,82 @@
         </div>
     </div>
 </section>
+
+<!-- Free Services Section -->
+<section class="free-services py-5">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="secondary">Our</span>
+            <span class="primary">Free Services</span>
+        </h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="service-card text-center p-4">
+                    <i class="fas fa-briefcase fa-3x mb-3"></i>
+                    <h4>Unlimited Job Listings</h4>
+                    <p>Employers can post jobs for free, reaching thousands of candidates.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-card text-center p-4">
+                    <i class="fas fa-user-tie fa-3x mb-3"></i>
+                    <h4>Job Seeker Profiles</h4>
+                    <p>Candidates can create professional profiles and apply instantly.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-card text-center p-4">
+                    <i class="fas fa-users fa-3x mb-3"></i>
+                    <h4>Company Branding</h4>
+                    <p>Showcase your company to attract the best talent, absolutely free.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Job Providers Section -->
+<section class="job-providers py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="secondary">For</span>
+            <span class="primary">Job Providers</span>
+        </h2>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="p-4">
+                    <h4>Why Connect with Us?</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="fas fa-check-circle text-primary mr-2"></i>Free and easy job postings</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-primary mr-2"></i>Access to a wide pool of candidates</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-primary mr-2"></i>Enhanced employer branding</li>
+                    </ul>
+                    <!-- Connect with Us Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="connectDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Connect with Us
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="connectDropdown">
+                            <a class="dropdown-item" href="https://wa.me/9523619389" target="_blank">
+                                <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                            </a>
+                            <a class="dropdown-item" href="mailto:consultancychamparan@gmail.com">
+                                <i class="fas fa-envelope mr-2"></i>Email
+                            </a>
+                            <a class="dropdown-item" href="tel:+919523619389">
+                                <i class="fas fa-phone mr-2"></i>Call
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692" alt="Job Posting" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <!-- Featured Jobs Section -->
 <section class="featured-jobs">
@@ -320,7 +484,7 @@
                 <div class="job-card">
                     <div class="card-body">
                         <h5>{{ n.title }}</h5>
-                        <p>{{ n.company|truncatewords:2 }} - {{ n.location|truncatewords:1 }}</p>
+                        <p>{{ n.company|truncatechars:30 }} - {{ n.location|truncatewords:1 }}</p>
                         <span class="badge">Full-Time</span>
                         <a href="/job/{{ n.slug }}" class="btn btn-primary mt-3">Apply Now</a>
                     </div>

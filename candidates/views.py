@@ -19,6 +19,12 @@ def home(request):
     }
     return render(request, 'candidates/home.html', context)
 
+def AboutUs(request):
+    context = {
+        'about_us': "active",
+    }
+    return render(request, 'candidates/about_us.html', context)
+
 
 def job_search_list(request):
     query = request.GET.get('p')

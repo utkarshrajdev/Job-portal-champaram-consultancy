@@ -5,6 +5,10 @@
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8" />
+  <meta name="description" content="Find your dream job with thousands of job listings from top companies completely free!">
+  <meta name="keywords" content="jobs, careers, hiring, job search, employment, free, apply, online, job board, job portal,  job listings, job opportunities, job openings, job postings, job vacancies">
+  <meta name="author" content="Champaran Consultancy Services (CCS)">
+
   {% progressive_web_app_meta %}
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="icon" type="image/png" href="{% static 'icon.png' %}" />
@@ -151,6 +155,7 @@
             <a class="nav-item nav-link {{ recruiter_home }}" href="{% url 'detail-recruiters' %}">Home</a>
             <a class="nav-item nav-link {{ add_job_page }}" href="{% url 'add-job' %}">Add Job Post</a>
             <a class="nav-item nav-link {{ manage_jobs_page }}" href="{% url 'job-list' %}">Manage Jobs</a>
+            <a class="nav-item nav-link {{ home_page }}" href="{% url 'about_us' %}">About Us</a>
             <a class="nav-item nav-link {{ search_candidates_page }}" href="{% url 'search-candidates' %}">Search Candidates</a>
             <a class="nav-item nav-link" href="{% url 'detail-candidates' %}">Candidate Home</a>
             <a class="nav-item nav-link" href="{% url 'home' %}">Candidate Job Search</a>
@@ -158,6 +163,7 @@
             <!-- Regular Candidate Navigation -->
             <a class="nav-item nav-link {{ candidate_home }}" href="{% url 'detail-candidates' %}">Home</a>
             <a class="nav-item nav-link {{ home_page }}" href="{% url 'home' %}">Job Search</a>
+            <a class="nav-item nav-link {{ home_page }}" href="{% url 'about_us' %}">About Us</a>
             <a class="nav-item nav-link {{ intel_page }}" href="{% url 'intelligent-search' %}">Get Relevant Jobs</a>
             <a class="nav-item nav-link {{ profile_page }}" href="{% url 'my-profile' %}">My Profile</a>
           {% endif %}
@@ -165,6 +171,7 @@
           <!-- Navigation for non-logged in users -->
           <a class="nav-item nav-link {{ candidate_home }}" href="{% url 'detail-candidates' %}">Home</a>
           <a class="nav-item nav-link {{ home_page }}" href="{% url 'home' %}">Job Search</a>
+          <a class="nav-item nav-link {{ home_page }}" href="{% url 'about_us' %}">About Us</a>
           <a class="nav-item nav-link {{ intel_page }}" href="{% url 'intelligent-search' %}">Get Relevant Jobs</a>
         {% endif %}
         
@@ -235,10 +242,10 @@
           make the hiring process simpler.
         </p>
         <div class="social-links social-icons">
-          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="https://www.facebook.com/ChamparanConsultancyServices/"><i class="fa fa-facebook"></i></a>
           <a href="#"><i class="fa fa-twitter"></i></a>
           <a href="https://www.linkedin.com/company/champaran-consultancy-services/"><i class="fa fa-linkedin"></i></a>
-          <a href="https://www.youtube.com/@NerdByteCoding"><i class="fa fa-youtube"></i></a>
+          <a href=""><i class="fa fa-youtube"></i></a>
         </div>
       </div>
     </div>

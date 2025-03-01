@@ -5,8 +5,8 @@
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8" />
-  <meta name="description" content="Find your dream job with top companies and get expert job consultancy services for free across India!">
-  <meta name="keywords" content="jobs, careers, hiring, job search, employment, free, apply, online, job board, job portal,  job listings, job opportunities, job openings, job postings, job vacancies">
+  <meta name="description" content="Find your dream job for free! We connect skilled & fresher candidates with top private sector companies in India. No fees, just great career opportunities!">
+  <meta name="keywords" content="dream, job, open, free, positions, hiring, jobs, seekers, consultancy, services, employers, open positions, job seekers,  champaran consultancy, hiring process, make the hiring, job postings, job vacancies, Job Search, About Us">
   <meta name="author" content="Champaran Consultancy Services (CCS)">
 
   {% progressive_web_app_meta %}
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="{% static 'layout.css' %}">
 
   {% block cssfiles %}{% endblock cssfiles %}
-  <title>Champaran Consultancy</title>
+  <title>Champaran Consultancy Services | Free job consultancy services</title>
   <style>
     /* Header Styles */
     .navbar {
@@ -141,7 +141,7 @@
   <!-- Header -->
   <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <a class="navbar-brand" href="{% if user.is_staff %}{% url 'detail-recruiters' %}{% else %}{% url 'detail-candidates' %}{% endif %}">
-      <img src="{% static 'logo.png' %}" width="191" height="36" class="d-inline-block align-top mr-3" alt="" />
+      <img src="{% static 'logo.png' %}" width="191" height="36" class="d-inline-block align-top mr-3" alt="Company Logo" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

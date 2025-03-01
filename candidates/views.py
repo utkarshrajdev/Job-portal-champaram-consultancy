@@ -14,8 +14,10 @@ from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 
 def home(request):
+    object_list = Job.objects.all().order_by('-date_posted')[:3]
     context = {
         'home_page': "active",
+        'object_list':object_list
     }
     return render(request, 'candidates/home.html', context)
 

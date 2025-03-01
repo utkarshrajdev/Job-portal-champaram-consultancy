@@ -307,36 +307,20 @@
             <span class="primary">Jobs</span>
         </h2>
         <div class="row">
+            {% for n in object_list %}
+            <!-- Static Data for Featured Jobs -->
             <div class="col-md-4">
                 <div class="job-card">
                     <div class="card-body">
-                        <h5>Software Engineer</h5>
-                        <p>Tech Corp - San Francisco, CA</p>
-                        <span class="badge">Full-Time</span>
-                        <a href="#" class="btn btn-primary mt-3">Apply Now</a>
+                        <h5>{{ n.title }}</h5>
+                        <p>{{ n.company|truncatechars:30 }} - {{ n.location|truncatewords:1 }}</p>
+                        <span class="badge">{{ n.job_type }}</span>
+                        <a href="/job/{{ n.slug }}" class="btn btn-primary mt-3">Apply Now</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="job-card">
-                    <div class="card-body">
-                        <h5>Product Manager</h5>
-                        <p>Innovate Inc - New York, NY</p>
-                        <span class="badge">Remote</span>
-                        <a href="#" class="btn btn-primary mt-3">Apply Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="job-card">
-                    <div class="card-body">
-                        <h5>Data Scientist</h5>
-                        <p>DataWorks - Chicago, IL</p>
-                        <span class="badge">Contract</span>
-                        <a href="#" class="btn btn-primary mt-3">Apply Now</a>
-                    </div>
-                </div>
-            </div>
+            
+            {% endfor %}
         </div>
     </div>
 </section>

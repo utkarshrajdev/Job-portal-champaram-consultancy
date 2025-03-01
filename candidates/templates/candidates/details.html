@@ -485,7 +485,7 @@
                     <div class="card-body">
                         <h5>{{ n.title }}</h5>
                         <p>{{ n.company|truncatechars:30 }} - {{ n.location|truncatewords:1 }}</p>
-                        <span class="badge">Full-Time</span>
+                        <span class="badge">{{ n.job_type }}</span>
                         <a href="/job/{{ n.slug }}" class="btn btn-primary mt-3">Apply Now</a>
                     </div>
                 </div>

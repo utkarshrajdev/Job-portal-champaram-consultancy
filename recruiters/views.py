@@ -43,7 +43,7 @@ def adminloginPage(request):
     context = {
         'rec_login_page': "active",
     }
-    return render(request, 'recruiters/login-admin.html', context)
+    return render(request, 'recruiters/login_admin.html', context)
 
 @login_required
 def add_job(request):

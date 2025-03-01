@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 
 
 urlpatterns = [
@@ -27,6 +28,8 @@ urlpatterns = [
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="users/password_reset_done.html"), name="password_reset_complete"),
     path('switch-to-candidate/', views.switch_to_candidate, name='switch-to-candidate'),
     path('switch-to-recruiter/', views.switch_to_recruiter, name='switch-to-recruiter'),
+    path("sitemap.xml/", TemplateView.as_view(template_name="users/sitemap.xml", content_type="application/xml")),
+    path("robots.txt/", TemplateView.as_view(template_name="users/robots.txt", content_type="text/plain")),
 
 
 
